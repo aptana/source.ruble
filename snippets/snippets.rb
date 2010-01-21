@@ -3,8 +3,7 @@ command 'Newline - \\n' do |s|
   s.scope = 'source'
   s.input = :none
   s.output = :insert_as_snippet
-  # FIXME Cursor should be at end after insertion, but it isn't!
-  s.invoke { "\\n" }
+  s.invoke { "\\n$1" }
 end
 
 
@@ -16,7 +15,7 @@ command 'Double Quotes - \\"...\\"' do |s|
     if ENV['TM_SELECTED_TEXT'].length > 0
       "\\\"${1:#{ENV['TM_SELECTED_TEXT']}}\\\""
     else
-      "\\\"${0}\\\""
+      "\\\"$1\\\""
     end
   end
 end
@@ -30,7 +29,7 @@ command 'Single Quotes - \\\'...\\\'' do |s|
     if ENV['TM_SELECTED_TEXT'].length > 0
       "\\'${1:#{ENV['TM_SELECTED_TEXT']}}\\'"
     else
-      "\\'${0}\\'"
+      "\\'$1\\'"
     end
   end
 end
