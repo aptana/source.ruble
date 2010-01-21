@@ -3,7 +3,7 @@ command 'Newline - \\n' do |s|
   s.scope = 'source'
   s.input = :none
   s.output = :insert_as_snippet
-  s.invoke { "\\n$1" }
+  s.invoke { "\\n" }
 end
 
 
@@ -15,7 +15,7 @@ command 'Double Quotes - \\"...\\"' do |s|
     if ENV['TM_SELECTED_TEXT'].length > 0
       "\\\"${1:#{ENV['TM_SELECTED_TEXT']}}\\\""
     else
-      "\\\"$1\\\""
+      "\\\"$0\\\""
     end
   end
 end
@@ -29,7 +29,7 @@ command 'Single Quotes - \\\'...\\\'' do |s|
     if ENV['TM_SELECTED_TEXT'].length > 0
       "\\'${1:#{ENV['TM_SELECTED_TEXT']}}\\'"
     else
-      "\\'$1\\'"
+      "\\'$0\\'"
     end
   end
 end
