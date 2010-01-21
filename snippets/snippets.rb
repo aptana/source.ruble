@@ -35,11 +35,21 @@ command 'Single Quotes - \\\'...\\\'' do |s|
 end
 
 
-snippet 'Insert Comment Banner' do |s|
-  # FIXME No tab trigger, probably needs to become command
-  s.expansion = '${TM_COMMENT_START/\s*$/ /}==${1/(.)|(?m:\n.*)/(?1:=)/g}==${TM_COMMENT_END/^\s*(.+)/ $1/}
-${TM_COMMENT_START/\s*$/ /}= ${1:${TM_SELECTED_TEXT:Banner}} =${TM_COMMENT_END/\s*(.+)/ $1/}
-${TM_COMMENT_START/\s*$/ /}==${1/(.)|(?m:\n.*)/(?1:=)/g}==${TM_COMMENT_END/\s*(.+)/ $1/}'
+command 'Insert Comment Banner' do |s|
+  s.key_binding = 'CONTROL+SHIFT+B'
+  s.input = :none
+  s.output = :insert_as_snippet
+  s.invoke do
+    selected = ENV['TM_SELECTED_TEXT'] || 'Banner'
+    selected = 'Banner' if selected.length == 0
+    spacer = "=" * selected.length
+    comment_start = ENV['TM_COMMENT_START']
+    comment_end = ENV['TM_COMMENT_END']
+    # FIXME We don't do transformations so our space doesn't dynamically adjust as user changes message
+"#{comment_start} ==#{spacer}== #{comment_end}
+#{comment_start} = ${1:#{selected}} = #{comment_end}
+#{comment_start} ==#{spacer}== #{comment_end}"
+  end
 end
 
 
