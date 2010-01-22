@@ -16,6 +16,7 @@ END
       submenu.separator
       submenu.command 'Insert Comment Banner'
       submenu.command 'Insert Comment Header'
+      submenu.command 'Reformat Comment'
     end
     main_menu.menu 'Insert Escaped' do |submenu|
       submenu.command 'Single Quotes - \\\'...\\\''

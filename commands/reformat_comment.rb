@@ -1,9 +1,9 @@
 require 'radrails'
 require "escape"
-
+# FIXME Doesn't like the comment.line scope. We probably aren't matching scopes properly again!
 command 'Reformat Comment' do |cmd|
-  cmd.key_binding = 'CONTROL+M2+q'
-  cmd.scope = 'comment.line'
+  cmd.key_binding = 'CONTROL+Q'
+#  cmd.scope = 'comment.line'
   cmd.output = :insert_as_snippet
   cmd.input = :selection, :scope
   cmd.invoke do |context|
@@ -18,7 +18,7 @@ command 'Reformat Comment' do |cmd|
     flags += " --retabify" unless ENV["TM_SOFT_TABS"] == "YES"
     
     command = "ruby #{e_sh(ENV["TM_BUNDLE_SUPPORT"])}/bin/rubywrap.rb #{flags}"
-    text    = open("| #{command}", "r+") do |wrapper|
+    text    = IO.popen(command, "r+") do |wrapper|
       wrapper << ctext
       wrapper.close_write
       wrapper.read
