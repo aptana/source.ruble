@@ -17,7 +17,7 @@ command 'Insert Block Comment' do |cmd|
   cmd.invoke do |context|    
     start, stop = find_markers
     context.exit_show_tool_tip "No block comment markers found for this language." if start.nil?
-    input = STDIN.read.to_s
+    input = STDIN.read
     
     if input =~ /\n/
       start << "\n"
@@ -25,5 +25,6 @@ command 'Insert Block Comment' do |cmd|
     end
     
     STDOUT << e_sn(start) << (input.empty? ? "\n\t$0\n" : e_sn(input)) << e_sn(stop)
+    nil
   end
 end
