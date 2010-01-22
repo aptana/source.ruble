@@ -12,6 +12,7 @@ command 'Convert Spaces to Tabs (Estimating Indent)' do |cmd|
     # probably go an cache a whole chunk of the file somewhere in
     # the IO pipeline anyway - but we like to make the effort.
     
+    # FIXME I think the editor code is converting the tabs right back into spaces! We probably need to force it off...
     spacing = nil
     lines = Array.new
     line = $stdin.gets
