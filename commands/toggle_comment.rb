@@ -7,7 +7,9 @@ def out(*args)
     $selected ? escaped.gsub("}", "\\}") : escaped.sub("\0", "${0}")
   end )
 end
-    
+
+
+# FIXME Keybinding isn't working
 command 'Comment Line / Selection' do |cmd|
   cmd.key_binding = 'M1+M2+/'
   cmd.output = :insert_as_snippet
@@ -42,8 +44,8 @@ command 'Comment Line / Selection' do |cmd|
     # maintain selection
     if text == ENV["TM_SELECTED_TEXT"]
       $selected = true
-      print "${0:"
-      at_exit { print "}" }
+      print "${1:"
+      
     else
       $selected = false
     end
@@ -74,6 +76,7 @@ command 'Comment Line / Selection' do |cmd|
           if $selected
             out text.gsub( /^(\s*)#{com[:esc_start]}(.*?)#{com[:esc_end]}(\s*)$/,
                            '\1\2\3' )
+            print "}"
             exit
           else
             r = text.sub( /^(\s*)#{com[:esc_start]}(.*?)#{com[:esc_end]}(\s*)$/,
@@ -92,6 +95,7 @@ command 'Comment Line / Selection' do |cmd|
         if text =~ regex
           if $selected
             out text.sub(regex, '\1\2\3')
+            print "}"
             exit
           else
             r = text.sub(regex, '\1\2\3')
@@ -150,5 +154,9 @@ command 'Comment Line / Selection' do |cmd|
         end
       end
     end
+    if $selected
+      print "}"
+    end
+    nil
   end
 end
