@@ -1,5 +1,5 @@
 require 'java'
-require 'radrails'
+require 'ruble'
 
 bundle 'Source' do |bundle|
   bundle.author = 'Allan Odgaard'
@@ -7,7 +7,7 @@ bundle 'Source' do |bundle|
   bundle.description =  <<END
 Miscellaneous support for working with source code. This bundle is essential, e.g. it allows you to toggle comments on ?/.
 END
-  bundle.repository = "git://github.com/aptana/source-rbundle.git"
+  bundle.repository = "git://github.com/aptana/source-ruble.git"
   
   bundle.menu 'Source' do |main_menu|
     main_menu.menu 'Comments' do |submenu|
@@ -37,8 +37,8 @@ END
   end
 end
 
-# Extend RadRails::Editor to add special ENV vars
-module RadRails
+# Extend Ruble::Editor to add special ENV vars
+module Ruble
   class Editor
     alias :to_env_pre_source_bundle :to_env
     def to_env

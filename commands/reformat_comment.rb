@@ -1,4 +1,4 @@
-require 'radrails'
+require 'ruble'
 require "escape"
 # FIXME Doesn't like the comment.line scope. We probably aren't matching scopes properly again!
 command 'Reformat Comment' do |cmd|

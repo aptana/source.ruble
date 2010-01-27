@@ -1,4 +1,4 @@
-require 'radrails'
+require 'ruble'
 
 command 'Insert Comment Header' do |cmd|
   cmd.trigger = 'head'

@@ -1,4 +1,4 @@
-require 'radrails'
+require 'ruble'
 
 # FIXME Keybinding doesn't seem to work properly
 command 'Toggle Single / Double String Quotes' do |cmd|

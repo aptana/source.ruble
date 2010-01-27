@@ -1,4 +1,4 @@
-require 'radrails'
+require 'ruble'
 require 'escape_snippet'
     
 command 'and Insert Terminator + LF' do |cmd|

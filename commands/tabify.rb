@@ -1,4 +1,4 @@
-require 'radrails'
+require 'ruble'
 
 command 'Convert Spaces to Tabs (Estimating Indent)' do |cmd|
   cmd.key_binding = 'CONTROL+SHIFT+COMMAND+T'
