@@ -40,18 +40,20 @@ end
 # Extend Ruble::Editor to add special ENV vars
 module Ruble
   class Editor
-    alias :to_env_pre_source_bundle :to_env
-    def to_env
-      env_hash = to_env_pre_source_bundle
-      scopes = current_scope.split(' ')
-      if !scopes.select {|scope| scope.start_with? "source" }.empty?
-        env_hash['TM_COMMENT_START'] ||= "/*"
-        env_hash['TM_COMMENT_END'] ||= "*/"
-        env_hash['TM_COMMENT_START_2'] ||= "// "
-        env_hash['TM_COMMENT_START_3'] ||= "# "
-        env_hash['TM_COMMENT_DISABLE_INDENT'] ||= "YES"
+    unless method_defined?(:to_env_pre_source_bundle)
+      alias :to_env_pre_source_bundle :to_env
+      def to_env
+        env_hash = to_env_pre_source_bundle
+        scopes = current_scope.split(' ')
+        if !scopes.select {|scope| scope.start_with? "source" }.empty?
+          env_hash['TM_COMMENT_START'] ||= "/*"
+          env_hash['TM_COMMENT_END'] ||= "*/"
+          env_hash['TM_COMMENT_START_2'] ||= "// "
+          env_hash['TM_COMMENT_START_3'] ||= "# "
+          env_hash['TM_COMMENT_DISABLE_INDENT'] ||= "YES"
+        end
+        env_hash
       end
-      env_hash
     end
   end
 end
