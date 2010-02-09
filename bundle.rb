@@ -7,7 +7,7 @@ bundle 'Source' do |bundle|
   bundle.description =  <<END
 Miscellaneous support for working with source code. This bundle is essential, e.g. it allows you to toggle comments on ?/.
 END
-  bundle.repository = "git://github.com/aptana/source-ruble.git"
+  bundle.repository = "git://github.com/aptana/source.ruble.git"
   
   bundle.menu 'Source' do |main_menu|
     main_menu.menu 'Comments' do |submenu|
