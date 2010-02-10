@@ -25,7 +25,7 @@ def camelcase_to_pascalcase(word)
 end
 
 command 'Toggle camelCase / snake_case / PascalCase' do |cmd|
-  cmd.key_binding = 'CONTROL+M2+_'
+  cmd.key_binding = 'CONTROL+M2+-'
   cmd.scope = 'source'
   cmd.output = :replace_selection
   cmd.input = :selection, :word
