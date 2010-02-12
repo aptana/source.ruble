@@ -2,9 +2,11 @@ require 'java'
 require 'ruble'
 
 bundle 'Source' do |bundle|
-  bundle.author = 'Allan Odgaard'
-  bundle.contact_email_rot_13 = 'gz-ohaqyrf@znpebzngrf.pbz'
+  bundle.author = 'Christopher Williams'
+  bundle.copyright = "© Copyright 2010 Aptana Inc. Distributed under the MIT license."
   bundle.description =  <<END
+A port of the TextMate bundle.
+
 Miscellaneous support for working with source code. This bundle is essential, e.g. it allows you to toggle comments on ?/.
 END
   bundle.repository = "git://github.com/aptana/source.ruble.git"
