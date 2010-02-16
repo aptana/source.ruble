@@ -12,6 +12,12 @@ END
   bundle.repository = "git://github.com/aptana/source.ruble.git"
   
   bundle.menu 'Source' do |main_menu|
+    main_menu.menu 'Folding' do |folding_menu|
+      folding_menu.command 'Expand'
+      folding_menu.command 'Collapse'
+      folding_menu.command 'Expand All'
+      folding_menu.command 'Collapse All'
+    end    
     main_menu.menu 'Comments' do |submenu|
       submenu.command 'Comment Line / Selection'
       submenu.command 'Insert Block Comment'
