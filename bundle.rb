@@ -58,11 +58,14 @@ module Ruble
         env_hash = to_env_pre_source_bundle
         scopes = current_scope.split(' ')
         if !scopes.select {|scope| scope.start_with? "source" }.empty?
-          env_hash['TM_COMMENT_START'] ||= "/*"
-          env_hash['TM_COMMENT_END'] ||= "*/"
-          env_hash['TM_COMMENT_START_2'] ||= "// "
-          env_hash['TM_COMMENT_START_3'] ||= "# "
-          env_hash['TM_COMMENT_DISABLE_INDENT'] ||= "YES"
+          # Only do this if some specialized scope hasn't contributed comment starts and ends
+          if !env_hash.include? 'TM_COMMENT_START'
+            env_hash['TM_COMMENT_START'] ||= "/*"
+            env_hash['TM_COMMENT_END'] ||= "*/"
+            env_hash['TM_COMMENT_START_2'] ||= "// "
+            env_hash['TM_COMMENT_START_3'] ||= "# "
+            env_hash['TM_COMMENT_DISABLE_INDENT'] ||= "YES"
+          end          
         end
         env_hash
       end
