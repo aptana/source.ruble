@@ -8,10 +8,8 @@ def out(*args)
   end )
 end
 
-
-# FIXME Keybinding isn't working
 command 'Comment Line / Selection' do |cmd|
-  cmd.key_binding = 'M1+M2+/'
+  cmd.key_binding = 'M1+/'
   cmd.output = :insert_as_snippet
   cmd.input = :selection, :line
   cmd.invoke do |context|
@@ -45,7 +43,6 @@ command 'Comment Line / Selection' do |cmd|
     if text == ENV["TM_SELECTED_TEXT"]
       $selected = true
       print "${1:"
-      
     else
       $selected = false
     end
@@ -77,7 +74,7 @@ command 'Comment Line / Selection' do |cmd|
             out text.gsub( /^(\s*)#{com[:esc_start]}(.*?)#{com[:esc_end]}(\s*)$/,
                            '\1\2\3' )
             print "}"
-            exit
+            exit 0
           else
             r = text.sub( /^(\s*)#{com[:esc_start]}(.*?)#{com[:esc_end]}(\s*)$/,
                           '\1\2\3' )
@@ -87,7 +84,7 @@ command 'Comment Line / Selection' do |cmd|
                 [i, r.length].min
             r[i, 0] = "\0"
             out r
-            exit
+            exit 0
           end
         end
       when "block" # block comment
@@ -96,7 +93,7 @@ command 'Comment Line / Selection' do |cmd|
           if $selected
             out text.sub(regex, '\1\2\3')
             print "}"
-            exit
+            exit 0
           else
             r = text.sub(regex, '\1\2\3')
             i = ENV["TM_LINE_INDEX"].to_i
@@ -105,7 +102,7 @@ command 'Comment Line / Selection' do |cmd|
                 [i, r.length].min
             r[i, 0] = "\0"
             out r
-            exit
+            exit 0
           end
         end
       end
@@ -154,9 +151,7 @@ command 'Comment Line / Selection' do |cmd|
         end
       end
     end
-    if $selected
-      print "}"
-    end
+    print "}" if $selected
     nil
   end
 end
