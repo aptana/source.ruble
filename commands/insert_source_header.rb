@@ -25,6 +25,8 @@ command 'Insert Comment Header' do |cmd|
     project = case tm_project_dir
     when /.*\/(.*)/
     	project = Regexp.last_match(1)
+    when /C:\\.*\\(.*)/
+      project = Regexp.last_match(1)
     else
     	project_placeholder
     end
@@ -41,19 +43,19 @@ command 'Insert Comment Header' do |cmd|
     end
     
     username	= ENV['TM_FULLNAME']
-    # FIXME Don't use backticks here
-    date		= `date +%Y-%m-%d`.chomp
+    date		= Time.now.strftime("%Y-%m-%d").chomp
+    
+    
     
     # Default to username if no organization name
     copyright_holder ||= username
     
-# FIXME Don't use backticks here
 print %Q{#{line_comment}#{comment_start}
 #{line_comment}#{indent}#{tm_filename}
 #{line_comment}#{indent}#{project}
 #{line_comment}#{indent}
 #{line_comment}#{indent}Created by #{username} on #{date}.
-#{line_comment}#{indent}Copyright #{`date +%Y`.chomp} #{copyright_holder}. All rights reserved.
+#{line_comment}#{indent}Copyright #{Time.now.year} #{copyright_holder}. All rights reserved.
 #{line_comment}#{comment_end}
 $0}
   end
