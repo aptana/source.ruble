@@ -137,7 +137,11 @@
 # stdout.
 #
 
-require 'rdoc/usage'
+begin
+  require 'rdoc/usage' 
+rescue LoadError
+  # ignore hopefully
+end
 require 'getoptlong'
 
 opts = GetoptLong.new(

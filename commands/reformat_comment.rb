@@ -8,7 +8,7 @@ command 'Reformat Comment' do |cmd|
   cmd.output = :insert_as_snippet
   cmd.input = :selection, :scope
   cmd.invoke do |context|
-    ctext = STDIN.read
+    ctext = $stdin.read
     if ctext =~ /^\s*(.[^\s\w\\]*\s*)/
       cstring = $1
     else
@@ -24,7 +24,7 @@ command 'Reformat Comment' do |cmd|
       command = "ruby #{e_sh(ENV["TM_BUNDLE_SUPPORT"])}/bin/rubywrap.rb #{flags}"
     end
 
-    text    = IO.popen(command, "r+") do |wrapper|
+    text = IO.popen(command, "r+") do |wrapper|
       wrapper << ctext
       wrapper.close_write
       wrapper.read

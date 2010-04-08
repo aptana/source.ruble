@@ -28,6 +28,7 @@ module Ruble
     
     def execute(input, context = CommandContext.new)
       context.output = output.first if context
+      ENV["TM_BUNDLE_SUPPORT"] = File.join(File.dirname(__FILE__), "..", "..", "lib")
       result = nil
   
       if invoke.is_block?
