@@ -14,7 +14,7 @@ command 'Convert Spaces to Tabs (Estimating Indent)' do |cmd|
     
     # FIXME I think the editor code is converting the tabs right back into spaces! We probably need to force it off...
     spacing = nil
-    lines = Array.new
+    lines = []
     line = $stdin.gets
     while(line != nil)
     	lines << line
