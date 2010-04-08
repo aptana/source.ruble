@@ -1,5 +1,4 @@
 require 'ruble'
-require 'escape_snippet'
     
 command 'and Insert Terminator + LF' do |cmd|
   cmd.key_binding = 'SHIFT+COMMAND+ENTER'

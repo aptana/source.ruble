@@ -7,7 +7,7 @@ command 'Toggle Single / Double String Quotes' do |cmd|
   cmd.output = :replace_selection
   cmd.input = :selection, :scope
   cmd.invoke do |context|
-    print case str = STDIN.read
+    print case str = $stdin.read
       when /\A"(.*)"\z/m; "'" + $1 + "'"
       when /\A'(.*)'\z/m; '"' + $1 + '"'
       else str

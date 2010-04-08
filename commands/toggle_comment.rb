@@ -36,7 +36,7 @@ command 'Comment Line / Selection' do |cmd|
       end
     end
     
-    text    = STDIN.read
+    text    = $stdin.read
     default = nil  # the comment we will insert, if none are removed
     
     # maintain selection

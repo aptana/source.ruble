@@ -31,8 +31,7 @@ command 'Toggle camelCase / snake_case / PascalCase' do |cmd|
   cmd.input = :selection, :word
   cmd.invoke do |context|
     word = $stdin.gets
-    
-    context.exit_with_message('', :discard) if word.nil? # FIXME Textmate uses Textmate.exit_discard
+    context.exit_discard if word.nil?
     
     is_pascal = word.match(/^[A-Z]{1}/) ? true : false
     is_snake = word.match(/_/) ? true : false
