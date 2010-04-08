@@ -40,7 +40,8 @@ module Ruble
           result ||= $stdout.string
         rescue SystemExit => e
           # TODO Save the exit code?
-          result = context.forced_output
+          result ||= $stdout.string
+          result = context.forced_output if context.forced_output
         ensure
           $stdin = STDIN
           $stdout = STDOUT

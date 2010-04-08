@@ -23,7 +23,7 @@ class ToggleCamelcaseVsUnderscoreTest < CommandTestCase
   end
   
   def test_empty_input
-    assert_equal(nil, execute(''))
+    assert_equal('', execute(''))
     assert_output_type(:discard)
   end
   

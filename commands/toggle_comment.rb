@@ -16,7 +16,7 @@ command 'Comment Line / Selection' do |cmd|
     # by James Edward Gray II <james (at) grayproductions.net>
     
     # 
-    # To override the operation of this commond for your language add a Preferences
+    # To override the operation of this command for your language add a Preferences
     # bundle item that defines the following valiables as appropriate for your
     # language:
     # 
@@ -108,7 +108,7 @@ command 'Comment Line / Selection' do |cmd|
       end
     end
     
-    # none of our removals worked, so preform an insert (minding indent setting)
+    # none of our removals worked, so perform an insert (minding indent setting)
     text[ENV["TM_LINE_INDEX"].to_i, 0] = "\0" unless $selected or text.empty?
     case default[:mode]
     when "line"  # apply comment line by line

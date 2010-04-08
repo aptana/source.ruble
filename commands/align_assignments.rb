@@ -38,7 +38,7 @@ command 'Align Assignments' do |cmd|
     # is in the block.  If called on the document, we start on the 
     # current line and look up and down for the start and end of the
     # block.
-    if selected_text then
+    if selected_text
        block_top    = 1
        block_bottom = lines.length
     else
@@ -56,10 +56,10 @@ command 'Align Assignments' do |cmd|
        search_bottom = lines.length
        search_failed = false
     
-       if lines[start_on - 1] !~ relevant_line_pattern then
-          if lines[start_on - 2] =~ relevant_line_pattern then
+       if lines[start_on - 1] !~ relevant_line_pattern
+          if lines[start_on - 2] =~ relevant_line_pattern
              search_bottom = start_on = start_on - 1
-          elsif lines[start_on] =~ relevant_line_pattern then
+          elsif lines[start_on] =~ relevant_line_pattern
              search_top = start_on = start_on
           else
              search_failed = true
@@ -71,7 +71,7 @@ command 'Align Assignments' do |cmd|
        # the block top and bottom.
        unless search_failed
           start_on.downto(search_top) do |number|
-             if lines[number-1] =~ relevant_line_pattern then
+             if lines[number-1] =~ relevant_line_pattern
                 block_top = number
              else
                 break
@@ -79,7 +79,7 @@ command 'Align Assignments' do |cmd|
           end
           
           start_on.upto(search_bottom) do |number|
-             if lines[number-1] =~ relevant_line_pattern then
+             if lines[number-1] =~ relevant_line_pattern
                 block_bottom = number
              else
                 break
@@ -98,7 +98,7 @@ command 'Align Assignments' do |cmd|
     best_column = 0
     block_top.upto(block_bottom) do |number|
        line = lines[number - 1]
-       if line =~ relevant_line_pattern then
+       if line =~ relevant_line_pattern
           m = column_search_pattern.match(line)
           best_column = m.begin(0) if m.begin(0) > best_column
        end
@@ -109,7 +109,7 @@ command 'Align Assignments' do |cmd|
     # Reformat the block.  Again, we cannot assume all lines in the 
     # block are relevant.
     block_top.upto(block_bottom) do |number|
-       if lines[number-1] =~ relevant_line_pattern then
+       if lines[number-1] =~ relevant_line_pattern
           before, after = lines[number-1].split(/[\t ]*=[\t ]*/, 2)
           lines[number-1] = [before.ljust(best_column), after].join(after[0,1] == '>' ? " =" : " = ")
        end
