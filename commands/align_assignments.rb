@@ -26,7 +26,7 @@ command 'Align Assignments' do |cmd|
     # See the license for full details (they override anything I've 
     # said here).
     
-    lines = STDIN.readlines()
+    lines = $stdin.readlines
     selected_text = ENV.member?("TM_SELECTED_TEXT")
     
     relevant_line_pattern = /^[^=]+[^-+<>=!%\/|&*^]=(?!=|~)/
@@ -38,7 +38,6 @@ command 'Align Assignments' do |cmd|
     # is in the block.  If called on the document, we start on the 
     # current line and look up and down for the start and end of the
     # block.
-    
     if selected_text then
        block_top    = 1
        block_bottom = lines.length
@@ -70,7 +69,6 @@ command 'Align Assignments' do |cmd|
        #
        # Now with the search boundaries set, start looking for
        # the block top and bottom.
-       
        unless search_failed
           start_on.downto(search_top) do |number|
              if lines[number-1] =~ relevant_line_pattern then
@@ -97,7 +95,6 @@ command 'Align Assignments' do |cmd|
     # first bit of whitespace before the equal sign.  We put the
     # equals sign to the right of the furthest-right one.  Note that
     # we cannot assume every line in the block is relevant.
-    
     best_column = 0
     block_top.upto(block_bottom) do |number|
        line = lines[number - 1]
@@ -111,7 +108,6 @@ command 'Align Assignments' do |cmd|
     #
     # Reformat the block.  Again, we cannot assume all lines in the 
     # block are relevant.
-    
     block_top.upto(block_bottom) do |number|
        if lines[number-1] =~ relevant_line_pattern then
           before, after = lines[number-1].split(/[\t ]*=[\t ]*/, 2)
@@ -119,12 +115,9 @@ command 'Align Assignments' do |cmd|
        end
     end
     
-    
     #
     # Output the replacement text
-    
-    lines.each do |line|
-       puts line
-    end
+    lines.each {|line| puts line }
+    nil
   end
 end
