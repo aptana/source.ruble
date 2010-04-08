@@ -13,8 +13,8 @@ command 'Insert Comment Header' do |cmd|
     # entirely.
     #
     
-    file_placeholder = '${1:«file»}'
-    project_placeholder = '${2:«project»}'
+    file_placeholder = '${1:<file>}'
+    project_placeholder = '${2:<project>}'
     
     tm_filename		= ENV['TM_FILENAME']			|| file_placeholder
     tm_project_dir	= ENV['TM_PROJECT_DIRECTORY']	|| ''
