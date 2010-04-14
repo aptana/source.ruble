@@ -1,3 +1,5 @@
+require 'ruble'
+
 command 'Newline - \\n' do |s|
   s.key_binding = 'CONTROL+ENTER'
   s.scope = 'source'
