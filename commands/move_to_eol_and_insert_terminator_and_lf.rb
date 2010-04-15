@@ -1,13 +1,16 @@
 require 'ruble'
     
 command 'and Insert Terminator + LF' do |cmd|
-  cmd.key_binding = 'SHIFT+COMMAND+ENTER'
+  cmd.key_binding = 'M1+M2+ENTER'
   cmd.scope = 'source'
-  cmd.output = :insert_as_snippet
-  cmd.input = :selection, :line
+  cmd.output = :discard
+  cmd.input = :line
   cmd.invoke do |context|
-    require 'escape_snippet'
+    # FIXME To match Textmate, we should insert terminator at end of selection if there is one, but EOL at end of line
     termchar = ENV['TM_LINE_TERMINATOR'] || ";"
-    es($stdin.read()[/^(.*?);*\s*$/, 1]) + "#{es(termchar)}\n$0"
+    line = context.editor.selection.start_line
+    offset = context.editor.styled_text.get_offset_at_line(line) + $stdin.read.length
+    context.editor[offset, 0] = termchar
+    context.editor[offset + 1, 0] = "\n"
   end
 end

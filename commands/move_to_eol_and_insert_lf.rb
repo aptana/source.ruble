@@ -1,12 +1,13 @@
 require 'ruble'
-require 'escape_snippet'
     
 command 'and Insert LF' do |cmd|
-  cmd.key_binding = 'COMMAND+ENTER'
+  cmd.key_binding = 'M1+ENTER'
   cmd.scope = 'source'
-  cmd.output = :insert_as_snippet
-  cmd.input = :selection, :line
+  cmd.output = :discard
+  cmd.input = :line
   cmd.invoke do |context|
-    es($stdin.read()[/^(.*?);*\s*$/, 1]) + "\n$0"
+    line = context.editor.selection.start_line
+    offset = context.editor.styled_text.get_offset_at_line(line) + $stdin.read.length
+    context.editor[offset, 0] = "\n"
   end
 end

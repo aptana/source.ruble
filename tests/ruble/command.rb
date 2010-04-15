@@ -27,7 +27,13 @@ module Ruble
     end
     
     def execute(input, context = CommandContext.new)
-      context.output = output.first if context
+      if context
+        if output.respond_to? :first
+          context.output = output.first
+        else
+          context.output = output
+        end
+      end
       ENV["TM_BUNDLE_SUPPORT"] = File.join(File.dirname(__FILE__), "..", "..", "lib")
       result = nil
   
