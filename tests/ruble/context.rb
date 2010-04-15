@@ -16,4 +16,8 @@ class CommandContext
     @forced_output = message
     exit(1)
   end
+  
+  def editor
+    @editor ||= Editor.new
+  end
 end

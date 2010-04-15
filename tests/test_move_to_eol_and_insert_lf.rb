@@ -8,7 +8,9 @@ class InsertLFTest < CommandTestCase
   end
   
   def test_insert_lf
-    assert_equal("Comment here\n$0", execute("Comment here"))
-    assert_output_type(:insert_as_snippet)
+    @context.editor.document = "Comment here"
+    execute("Comment here")
+    assert_equal("Comment here\n", @context.editor.document.get)
+    assert_output_type(:discard)
   end
 end

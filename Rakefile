@@ -4,5 +4,5 @@ require 'rake/rdoctask'
 
 Rake::TestTask.new do |t|
   t.libs << ["tests", "commands"]
-  t.test_files = FileList['tests/test*.rb']
+  t.test_files = FileList['tests/test_*.rb']
 end

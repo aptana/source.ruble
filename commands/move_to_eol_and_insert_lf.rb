@@ -7,7 +7,7 @@ command 'and Insert LF' do |cmd|
   cmd.input = :line
   cmd.invoke do |context|
     line = context.editor.selection.start_line
-    offset = context.editor.styled_text.get_offset_at_line(line) + $stdin.read.length
+    offset = context.editor.offset_at_line(line) + $stdin.read.length
     context.editor[offset, 0] = "\n"
   end
 end

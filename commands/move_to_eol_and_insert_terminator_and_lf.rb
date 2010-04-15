@@ -9,7 +9,7 @@ command 'and Insert Terminator + LF' do |cmd|
     # FIXME To match Textmate, we should insert terminator at end of selection if there is one, but EOL at end of line
     termchar = ENV['TM_LINE_TERMINATOR'] || ";"
     line = context.editor.selection.start_line
-    offset = context.editor.styled_text.get_offset_at_line(line) + $stdin.read.length
+    offset = context.editor.offset_at_line(line) + $stdin.read.length
     context.editor[offset, 0] = termchar
     context.editor[offset + 1, 0] = "\n"
   end
