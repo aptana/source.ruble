@@ -10,7 +10,7 @@ end
 
 
 command 'Double Quotes - \\"...\\"' do |s|
-  s.key_binding = 'OPTION+COMMAND+"'
+  s.key_binding = 'OPTION+COMMAND+\''
   s.input = :none
   s.output = :insert_as_snippet
   s.invoke do
