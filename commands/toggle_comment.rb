@@ -17,7 +17,7 @@ command 'Comment Line / Selection' do |cmd|
     
     # 
     # To override the operation of this command for your language add a Preferences
-    # bundle item that defines the following valiables as appropriate for your
+    # bundle item that defines the following variables as appropriate for your
     # language:
     # 
     #   TM_COMMENT_START - the character string that starts comments, e.g. /*
@@ -112,6 +112,16 @@ command 'Comment Line / Selection' do |cmd|
     text[ENV["TM_LINE_INDEX"].to_i, 0] = "\0" unless $selected or text.empty?
     case default[:mode]
     when "line"  # apply comment line by line
+      # modify text to expand to include beginning of first line when we're turning comments on in line mode!
+      if $selected
+        line_number = ENV["TM_SELECTION_START_LINE_NUMBER"].to_i - 1
+        line_offset = ENV["TM_LINE_INDEX"].to_i
+        if line_offset > 0
+          prefix = context.editor.line(line_number)[0, line_offset]
+          text = prefix + text
+          context.editor[context.editor.offset_at_line(line_number), line_offset] = ""
+        end
+      end
       if text.empty?
         out "#{default[:start]}\0#{default[:end]}"
       elsif default[:no_indent]
