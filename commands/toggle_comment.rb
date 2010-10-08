@@ -1,5 +1,4 @@
 require 'ruble'
-require 'escape'
 
 def out(*args)
   print( *args.map do |arg|
@@ -13,6 +12,7 @@ command 'Comment Line / Selection' do |cmd|
   cmd.output = :insert_as_snippet
   cmd.input = :selection, :line
   cmd.invoke do |context|
+    require 'escape'
     # by James Edward Gray II <james (at) grayproductions.net>
     
     # 

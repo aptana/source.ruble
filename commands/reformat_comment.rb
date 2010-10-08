@@ -1,6 +1,5 @@
 require 'ruble'
-require "escape"
-require 'rbconfig'
+
 # FIXME Doesn't like the comment.line scope. We probably aren't matching scopes properly again!
 command 'Reformat Comment' do |cmd|
   cmd.key_binding = 'CONTROL+Q'
@@ -18,6 +17,9 @@ command 'Reformat Comment' do |cmd|
     flags = %Q{-p "#{cstring}"}
     flags += " --retabify" unless ENV["TM_SOFT_TABS"] == "YES"
     
+    require "escape"
+    require 'rbconfig'
+
     if RbConfig::CONFIG['target_os'] =~ /(win|w)32$/
       command = "ruby \"#{e_sn(ENV["TM_BUNDLE_SUPPORT"])}\\bin\\rubywrap.rb\" #{flags}"
     else
