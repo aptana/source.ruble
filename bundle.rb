@@ -61,3 +61,6 @@ env "source" do |e|
     e['TM_COMMENT_DISABLE_INDENT'] ||= "YES"
   end
 end
+
+smart_typing_pairs['source'] = ['"', '"', '(', ')', '{', '}', '[', ']', 'Ò', 'Ó', 'Ô', 'Õ', "'", "'", '`', '`']
+smart_typing_pairs['string.quoted.double, comment'] = ['"', '"', '(', ')', '{', '}', '[', ']', 'Ò', 'Ó', 'Ô', 'Õ']
