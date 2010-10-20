@@ -6,7 +6,7 @@ command 'and Insert Terminator + LF' do |cmd|
   cmd.output = :discard
   cmd.input = :line
   cmd.invoke do |context|
-    # FIXME To match Textmate, we should insert terminator at end of selection if there is one, but EOL at end of line
+    # FIXME To match TextMate, we should insert terminator at end of selection if there is one, but EOL at end of line
     termchar = ENV['TM_LINE_TERMINATOR'] || ";"
     line = context.editor.selection.start_line
     offset = context.editor.offset_at_line(line) + $stdin.read.length
