@@ -8,7 +8,7 @@ command 'Insert Comment Header' do |cmd|
     #
     # Notes:
     #
-    # '(c)' is legally ambiguous. '©' is not ambiguous, but may cause problems for some compilers.
+    # '(c)' is legally ambiguous. 'Â©' is not ambiguous, but may cause problems for some compilers.
     # The copyright symbol is redundant if the word 'Copyright' is present, so it's safe to omit it
     # entirely.
     #

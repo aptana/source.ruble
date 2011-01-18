@@ -62,5 +62,5 @@ env "source" do |e|
   end
 end
 
-smart_typing_pairs['source'] = ['"', '"', '(', ')', '{', '}', '[', ']', 'Ò', 'Ó', 'Ô', 'Õ', "'", "'", '`', '`']
-smart_typing_pairs['string.quoted.double, comment'] = ['"', '"', '(', ')', '{', '}', '[', ']', 'Ò', 'Ó', 'Ô', 'Õ']
+smart_typing_pairs['source'] = ['"', '"', '(', ')', '{', '}', '[', ']', 'â€œ', 'â€', 'â€˜', 'â€™', "'", "'", '`', '`']
+smart_typing_pairs['string.quoted.double, comment'] = ['"', '"', '(', ')', '{', '}', '[', ']', 'â€œ', 'â€', 'â€˜', 'â€™']

@@ -1,4 +1,4 @@
-# escape text to make it useable in a shell script as one ÒwordÓ (string)
+# escape text to make it useable in a shell script as one "word" (string)
 def e_sh(str)
   str.to_s.gsub(/(?=[^a-zA-Z0-9_.\/\-\x7F-\xFF\n])/n, '\\').gsub(/\n/, "'\n'").sub(/^$/, "''")
 end
@@ -26,7 +26,7 @@ def e_url(str)
 end
 
 # Make string suitable for display as HTML, preserve spaces. Set :no_newline_after_br => true
-# to cause Ò\nÓ to be substituted by Ò<br>Ó instead of Ò<br>\nÓ
+# to cause "\n" to be substituted by "<br>" instead of "<br>\n"
 def htmlize(str, opts = {})
   str = str.to_s.gsub("&", "&amp;").gsub("<", "&lt;")
   str = str.gsub(/\t+/, '<span style="white-space:pre;">\0</span>')
