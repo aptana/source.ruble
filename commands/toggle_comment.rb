@@ -119,7 +119,8 @@ command 'Comment Line / Selection' do |cmd|
         if line_offset > 0
           prefix = context.editor.line(line_number)[0, line_offset]
           text = prefix + text
-          context.editor[context.editor.offset_at_line(line_number), line_offset] = ""
+          cur_selection = context.editor.selection
+          context.editor.selection = [cur_selection.offset - line_offset, cur_selection.length + line_offset]
         end
       end
       if text.empty?
