@@ -230,20 +230,19 @@ children:
   displayName: Source
   path: bundle.rb
   scope: null
-- !!com.aptana.scripting.model.EnvironmentElement {customProperties: null, displayName: snippet-06d7724f-6818-4584-bf4f-d9e3b232ccbe,
+- !!com.aptana.scripting.model.EnvironmentElement {customProperties: null, displayName: snippet-59ba8c3e-8af8-428c-9d81-b405b0cea986,
   path: bundle.rb, scope: source}
 - !!com.aptana.scripting.model.SmartTypingPairsElement
   customProperties: null
-  displayName: smart_typing_pairs-8e987abc-ce9a-4a14-be45-64911752dd89
+  displayName: smart_typing_pairs-a0470395-c050-4589-b7bc-033839f200af
   pairs: [&id002 '"', *id002, &id005 (, &id006 ), &id007 '{', &id008 '}', &id009 '[',
-    &id010 ']', “, ”, ‘, ’, &id003 '''', *id003, &id004 '`', *id004]
+    &id010 ']', &id003 '''', *id003, &id004 '`', *id004]
   path: bundle.rb
   scope: source
 - !!com.aptana.scripting.model.SmartTypingPairsElement
   customProperties: null
-  displayName: smart_typing_pairs-598c477b-e60a-4cce-b723-5d789cd92646
-  pairs: [*id002, *id002, *id005, *id006, *id007, *id008, *id009, *id010, “, ”, ‘,
-    ’]
+  displayName: smart_typing_pairs-182ae8d2-d455-41cb-b099-44658b993aa3
+  pairs: [*id002, *id002, *id005, *id006, *id007, *id008, *id009, *id010]
   path: bundle.rb
   scope: string.quoted.double, comment
 - !!com.aptana.scripting.model.CommandElement
@@ -623,7 +622,7 @@ children:
   runType: current_thread
   scope: null
   workingDirectoryType: UNDEFINED
-copyright: © Copyright 2010 Aptana Inc. Distributed under the MIT license.
+copyright: Copyright 2010 Aptana Inc. Distributed under the MIT license.
 customProperties: null
 decreaseIndentMarkers: &id011 {}
 description: 'A port of the TextMate bundle.

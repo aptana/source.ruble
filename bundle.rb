@@ -3,7 +3,7 @@ require 'ruble'
 
 bundle do |bundle|
   bundle.author = 'Christopher Williams'
-  bundle.copyright = "© Copyright 2010 Aptana Inc. Distributed under the MIT license."
+  bundle.copyright = "Copyright 2010 Aptana Inc. Distributed under the MIT license."
   bundle.display_name = 'Source'
   bundle.description =  <<END
 A port of the TextMate bundle.
@@ -62,5 +62,6 @@ env "source" do |e|
   end
 end
 
-smart_typing_pairs['source'] = ['"', '"', '(', ')', '{', '}', '[', ']', '“', '”', '‘', '’', "'", "'", '`', '`']
-smart_typing_pairs['string.quoted.double, comment'] = ['"', '"', '(', ')', '{', '}', '[', ']', '“', '”', '‘', '’']
+# Smart character pairs option
+smart_typing_pairs['source'] = ['"', '"', '(', ')', '{', '}', '[', ']', "'", "'", '`', '`']
+smart_typing_pairs['string.quoted.double, comment'] = ['"', '"', '(', ')', '{', '}', '[', ']']
