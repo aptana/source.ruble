@@ -14,10 +14,6 @@ END
   
   bundle.menu 'Source' do |main_menu|
     main_menu.menu 'Folding' do |folding_menu|
-      folding_menu.command 'Expand'
-      folding_menu.command 'Collapse'
-      folding_menu.command 'Expand All'
-      folding_menu.command 'Collapse All'
       folding_menu.menu 'Toggle Foldings at Level' do |toggle_level|
         toggle_level.command 'All Levels'
         1.upto(9).each {|i| toggle_level.command i.to_s }
