@@ -1,540 +1,11 @@
 !!com.aptana.scripting.model.BundleElement
-author: Christopher Williams
+author: null
 children:
-- !!com.aptana.scripting.model.MenuElement
-  children:
-  - children:
-    - children: &id001 []
-      commandName: Expand
-      customProperties: null
-      displayName: Expand
-      path: bundle.rb
-      scope: null
-    - children: *id001
-      commandName: Collapse
-      customProperties: null
-      displayName: Collapse
-      path: bundle.rb
-      scope: null
-    - children: *id001
-      commandName: Expand All
-      customProperties: null
-      displayName: Expand All
-      path: bundle.rb
-      scope: null
-    - children: *id001
-      commandName: Collapse All
-      customProperties: null
-      displayName: Collapse All
-      path: bundle.rb
-      scope: null
-    - children:
-      - children: *id001
-        commandName: All Levels
-        customProperties: null
-        displayName: All Levels
-        path: bundle.rb
-        scope: null
-      - children: *id001
-        commandName: '1'
-        customProperties: null
-        displayName: '1'
-        path: bundle.rb
-        scope: null
-      - children: *id001
-        commandName: '2'
-        customProperties: null
-        displayName: '2'
-        path: bundle.rb
-        scope: null
-      - children: *id001
-        commandName: '3'
-        customProperties: null
-        displayName: '3'
-        path: bundle.rb
-        scope: null
-      - children: *id001
-        commandName: '4'
-        customProperties: null
-        displayName: '4'
-        path: bundle.rb
-        scope: null
-      - children: *id001
-        commandName: '5'
-        customProperties: null
-        displayName: '5'
-        path: bundle.rb
-        scope: null
-      - children: *id001
-        commandName: '6'
-        customProperties: null
-        displayName: '6'
-        path: bundle.rb
-        scope: null
-      - children: *id001
-        commandName: '7'
-        customProperties: null
-        displayName: '7'
-        path: bundle.rb
-        scope: null
-      - children: *id001
-        commandName: '8'
-        customProperties: null
-        displayName: '8'
-        path: bundle.rb
-        scope: null
-      - children: *id001
-        commandName: '9'
-        customProperties: null
-        displayName: '9'
-        path: bundle.rb
-        scope: null
-      commandName: Toggle Foldings at Level
-      customProperties: null
-      displayName: Toggle Foldings at Level
-      path: bundle.rb
-      scope: null
-    commandName: Folding
-    customProperties: null
-    displayName: Folding
-    path: bundle.rb
-    scope: null
-  - children:
-    - children: *id001
-      commandName: Comment Line / Selection
-      customProperties: null
-      displayName: Comment Line / Selection
-      path: bundle.rb
-      scope: null
-    - children: *id001
-      commandName: Insert Block Comment
-      customProperties: null
-      displayName: Insert Block Comment
-      path: bundle.rb
-      scope: null
-    - children: *id001
-      commandName: '-'
-      customProperties: null
-      displayName: '-'
-      path: bundle.rb
-      scope: null
-    - children: *id001
-      commandName: Insert Comment Banner
-      customProperties: null
-      displayName: Insert Comment Banner
-      path: bundle.rb
-      scope: null
-    - children: *id001
-      commandName: Insert Comment Header
-      customProperties: null
-      displayName: Insert Comment Header
-      path: bundle.rb
-      scope: null
-    - children: *id001
-      commandName: Reformat Comment
-      customProperties: null
-      displayName: Reformat Comment
-      path: bundle.rb
-      scope: null
-    commandName: Comments
-    customProperties: null
-    displayName: Comments
-    path: bundle.rb
-    scope: null
-  - children:
-    - children: *id001
-      commandName: Single Quotes - \'...\'
-      customProperties: null
-      displayName: Single Quotes - \'...\'
-      path: bundle.rb
-      scope: null
-    - children: *id001
-      commandName: Double Quotes - \"...\"
-      customProperties: null
-      displayName: Double Quotes - \"...\"
-      path: bundle.rb
-      scope: null
-    - children: *id001
-      commandName: Newline - \n
-      customProperties: null
-      displayName: Newline - \n
-      path: bundle.rb
-      scope: null
-    commandName: Insert Escaped
-    customProperties: null
-    displayName: Insert Escaped
-    path: bundle.rb
-    scope: null
-  - children: *id001
-    commandName: '-'
-    customProperties: null
-    displayName: '-'
-    path: bundle.rb
-    scope: null
-  - children: *id001
-    commandName: Toggle Single / Double String Quotes
-    customProperties: null
-    displayName: Toggle Single / Double String Quotes
-    path: bundle.rb
-    scope: null
-  - children: *id001
-    commandName: Toggle camelCase / snake_case / PascalCase
-    customProperties: null
-    displayName: Toggle camelCase / snake_case / PascalCase
-    path: bundle.rb
-    scope: null
-  - children: *id001
-    commandName: '-'
-    customProperties: null
-    displayName: '-'
-    path: bundle.rb
-    scope: null
-  - children:
-    - children: *id001
-      commandName: and Insert LF
-      customProperties: null
-      displayName: and Insert LF
-      path: bundle.rb
-      scope: null
-    - children: *id001
-      commandName: and Insert Terminator
-      customProperties: null
-      displayName: and Insert Terminator
-      path: bundle.rb
-      scope: null
-    - children: *id001
-      commandName: and Insert Terminator + LF
-      customProperties: null
-      displayName: and Insert Terminator + LF
-      path: bundle.rb
-      scope: null
-    commandName: Move to EOL
-    customProperties: null
-    displayName: Move to EOL
-    path: bundle.rb
-    scope: null
-  - children: *id001
-    commandName: '-'
-    customProperties: null
-    displayName: '-'
-    path: bundle.rb
-    scope: null
-  - children: *id001
-    commandName: Align Assignments
-    customProperties: null
-    displayName: Align Assignments
-    path: bundle.rb
-    scope: null
-  commandName: Source
-  customProperties: null
-  displayName: Source
-  path: bundle.rb
-  scope: null
-- !!com.aptana.scripting.model.EnvironmentElement {customProperties: null, displayName: snippet-59ba8c3e-8af8-428c-9d81-b405b0cea986,
-  path: bundle.rb, scope: source}
-- !!com.aptana.scripting.model.SmartTypingPairsElement
-  customProperties: null
-  displayName: smart_typing_pairs-a0470395-c050-4589-b7bc-033839f200af
-  pairs: [&id002 '"', *id002, &id005 (, &id006 ), &id007 '{', &id008 '}', &id009 '[',
-    &id010 ']', &id003 '''', *id003, &id004 '`', *id004]
-  path: bundle.rb
-  scope: source
-- !!com.aptana.scripting.model.SmartTypingPairsElement
-  customProperties: null
-  displayName: smart_typing_pairs-182ae8d2-d455-41cb-b099-44658b993aa3
-  pairs: [*id002, *id002, *id005, *id006, *id007, *id008, *id009, *id010]
-  path: bundle.rb
-  scope: string.quoted.double, comment
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: Align Assignments
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': ['OPTION+COMMAND+]']
-  outputPath: null
-  outputType: replace_selection
-  path: commands/align_assignments.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: Expand
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [F1]
-  outputPath: null
-  outputType: discard
-  path: commands/folding.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: Expand All
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [F1]
-  outputPath: null
-  outputType: discard
-  path: commands/folding.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: Collapse
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [F1]
-  outputPath: null
-  outputType: discard
-  path: commands/folding.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: Collapse All
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [F1]
-  outputPath: null
-  outputType: discard
-  path: commands/folding.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: All Levels
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+0]
-  outputPath: null
-  outputType: discard
-  path: commands/folding.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: '1'
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+1]
-  outputPath: null
-  outputType: discard
-  path: commands/folding.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: '2'
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+2]
-  outputPath: null
-  outputType: discard
-  path: commands/folding.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: '3'
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+3]
-  outputPath: null
-  outputType: discard
-  path: commands/folding.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: '4'
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+4]
-  outputPath: null
-  outputType: discard
-  path: commands/folding.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: '5'
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+5]
-  outputPath: null
-  outputType: discard
-  path: commands/folding.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: '6'
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+6]
-  outputPath: null
-  outputType: discard
-  path: commands/folding.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: '7'
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+7]
-  outputPath: null
-  outputType: discard
-  path: commands/folding.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: '8'
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+8]
-  outputPath: null
-  outputType: discard
-  path: commands/folding.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: '9'
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+9]
-  outputPath: null
-  outputType: discard
-  path: commands/folding.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: Insert Block Comment
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+/]
-  outputPath: null
-  outputType: insert_as_snippet
-  path: commands/insert_block_comment.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties:
-    prefix_values: [head]
-  displayName: Insert Comment Header
-  inputPath: null
-  keyBindingMap: null
-  outputPath: null
-  outputType: insert_as_snippet
-  path: commands/insert_source_header.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: and Insert LF
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [M1+ENTER]
-  outputPath: null
-  outputType: discard
-  path: commands/move_to_eol_and_insert_lf.rb
-  runType: current_thread
-  scope: source
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: and Insert Terminator
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [M1+M3+ENTER]
-  outputPath: null
-  outputType: insert_as_snippet
-  path: commands/move_to_eol_and_insert_terminator.rb
-  runType: current_thread
-  scope: source
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: and Insert Terminator + LF
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [M1+M2+ENTER]
-  outputPath: null
-  outputType: discard
-  path: commands/move_to_eol_and_insert_terminator_and_lf.rb
-  runType: current_thread
-  scope: source
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: Reformat Comment
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [CONTROL+Q]
-  outputPath: null
-  outputType: insert_as_snippet
-  path: commands/reformat_comment.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: Convert Spaces to Tabs (Estimating Indent)
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [CONTROL+SHIFT+COMMAND+T]
-  outputPath: null
-  outputType: replace_document
-  path: commands/tabify.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
 - !!com.aptana.scripting.model.CommandElement
   async: false
   customProperties: null
   displayName: Toggle camelCase / snake_case / PascalCase
+  input: [selection, word]
   inputPath: null
   keyBindingMap:
     !!com.aptana.scripting.model.Platform 'ALL': [CONTROL+M2+-]
@@ -548,6 +19,7 @@ children:
   async: false
   customProperties: null
   displayName: Comment Line / Selection
+  input: [selection, line]
   inputPath: null
   keyBindingMap:
     !!com.aptana.scripting.model.Platform 'ALL': [M1+/]
@@ -561,6 +33,7 @@ children:
   async: false
   customProperties: null
   displayName: Toggle Single / Double String Quotes
+  input: [selection, undefined]
   inputPath: null
   keyBindingMap:
     !!com.aptana.scripting.model.Platform 'ALL': [CONTROL+M2+']
@@ -574,6 +47,7 @@ children:
   async: false
   customProperties: null
   displayName: Newline - \n
+  input: [none]
   inputPath: null
   keyBindingMap:
     !!com.aptana.scripting.model.Platform 'ALL': [CONTROL+ENTER]
@@ -587,6 +61,7 @@ children:
   async: false
   customProperties: null
   displayName: Double Quotes - \"...\"
+  input: [none]
   inputPath: null
   keyBindingMap:
     !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+']
@@ -600,6 +75,7 @@ children:
   async: false
   customProperties: null
   displayName: Single Quotes - \'...\'
+  input: [none]
   inputPath: null
   keyBindingMap:
     !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+']
@@ -613,6 +89,7 @@ children:
   async: false
   customProperties: null
   displayName: Insert Comment Banner
+  input: [none]
   inputPath: null
   keyBindingMap:
     !!com.aptana.scripting.model.Platform 'ALL': [CONTROL+SHIFT+B]
@@ -622,22 +99,16 @@ children:
   runType: current_thread
   scope: null
   workingDirectoryType: UNDEFINED
-copyright: Copyright 2010 Aptana Inc. Distributed under the MIT license.
+copyright: null
 customProperties: null
-decreaseIndentMarkers: &id011 {}
-description: 'A port of the TextMate bundle.
-
-
-  Miscellaneous support for working with source code. This bundle is essential, e.g.
-  it allows you to toggle comments on ?/.
-
-  '
+decreaseIndentMarkers: {}
+description: null
 displayName: Source
-fileTypeRegistry: *id011
-fileTypes: *id001
-foldingStartMarkers: *id011
-foldingStopMarkers: *id011
-increaseIndentMarkers: *id011
+fileTypeRegistry: {}
+fileTypes: []
+foldingStartMarkers: {}
+foldingStopMarkers: {}
+increaseIndentMarkers: {}
 license: null
 licenseUrl: null
 path: bundle.rb
