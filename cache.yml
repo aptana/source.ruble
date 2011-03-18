@@ -206,17 +206,17 @@ children:
   displayName: Source
   path: bundle.rb
   scope: null
-- !!com.aptana.scripting.model.EnvironmentElement {customProperties: null, displayName: environment-098ac97c-bed7-42f7-820a-8e276e7566bc,
+- !!com.aptana.scripting.model.EnvironmentElement {customProperties: null, displayName: environment-f1ef6004-91b2-433a-9c45-9c3465be910b,
   path: bundle.rb, scope: source}
 - !!com.aptana.scripting.model.SmartTypingPairsElement
   customProperties: null
-  displayName: smart_typing_pairs-3f9278c5-a3e5-4e4b-aecd-29d4943c89fd
+  displayName: smart_typing_pairs-fda830ca-5695-4f35-a2ef-8410509e09e7
   pairs: ['"', '"', (, ), '{', '}', '[', ']', '''', '''', '`', '`']
   path: bundle.rb
   scope: source
 - !!com.aptana.scripting.model.SmartTypingPairsElement
   customProperties: null
-  displayName: smart_typing_pairs-87ed35d3-46f1-4121-bc46-af322cf243a4
+  displayName: smart_typing_pairs-0379f8c7-a779-4f06-9ce4-ed57e9e11457
   pairs: ['"', '"', (, ), '{', '}', '[', ']']
   path: bundle.rb
   scope: string.quoted.double, comment

@@ -7,6 +7,25 @@ def out(*args)
   end )
 end
 
+def remove_leading_white_space(comment_text)
+  output_text = comment_text
+  if ENV['TM_INPUT_START_LINE_INDEX'].to_i != 0
+    first_iteration = true
+    comment_text.each do |line|
+      if first_iteration
+        output_text = line
+      elsif line.strip.empty?
+        output_text.concat(line)
+      else        
+        output_text.concat(line.lstrip)
+      end
+      
+      first_iteration=false
+    end
+  end
+  output_text
+end
+
 command 'Comment Line / Selection' do |cmd|
   cmd.key_binding = 'M1+/'
   cmd.output = :insert_as_snippet
@@ -90,6 +109,7 @@ command 'Comment Line / Selection' do |cmd|
       when "block" # block comment
         regex = /\A(\s*)#{com[:esc_start]}(.*?)#{com[:esc_end]}(\s*)\z/m
         if text =~ regex
+          text = remove_leading_white_space(text)
           if $selected
             out text.sub(regex, '\1\2\3')
             print "}"
@@ -150,7 +170,7 @@ command 'Comment Line / Selection' do |cmd|
         print "${0}"
         out $2, default[:end]
       elsif default[:no_indent]
-        out default[:start], text, default[:end]
+        out default[:start], remove_leading_white_space(text), default[:end]
       else
         lines = text.to_a
         if lines.empty?
