@@ -3,6 +3,7 @@ class CommandContext
   
   def initialize
     @output = :undefined
+    @hash = {}
   end
   
   def exit_discard
@@ -19,5 +20,13 @@ class CommandContext
   
   def editor
     @editor ||= Editor.new
+  end
+  
+  def [](key)
+    @hash[key]
+  end
+  
+  def []=(key, value)
+    @hash[key] = value
   end
 end

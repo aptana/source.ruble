@@ -1,188 +1,212 @@
 require 'ruble'
 
-def out(*args)
-  print( *args.map do |arg|
-    escaped = e_sn(arg)
-    $selected ? escaped.gsub("}", "\\}") : escaped.sub("\0", "${0}")
-  end )
-end
-
-def remove_leading_white_space(comment_text)
-  output_text = comment_text
-  if ENV['TM_INPUT_START_LINE_INDEX'].to_i != 0
-    first_iteration = true
-    comment_text.each do |line|
-      if first_iteration
-        output_text = line
-      elsif line.strip.empty?
-        output_text.concat(line)
-      else        
-        output_text.concat(line.lstrip)
-      end
-      
-      first_iteration=false
-    end
+# TODO Move this class into a lib file and require it in the block of the command!
+# Handles generating the comment types from ENV defined by the rubles.
+# Also deals with checking if the comment applies to given lines, and deals with adding or removing comments from lines
+class Comment
+  attr_reader :mode, :context
+  
+  def initialize(context, start_chars, end_chars, mode, disable_indent)
+    @context, @start_chars, @end_chars, @mode = context, start_chars, end_chars, mode
+    @disable_indent = (disable_indent == 'YES')
   end
-  output_text
-end
 
-command 'Comment Line / Selection' do |cmd|
-  cmd.key_binding = 'M1+/'
-  cmd.output = :insert_as_snippet
-  cmd.input = :selection, :line
-  cmd.invoke do |context|
-    require 'escape'
-    # by James Edward Gray II <james (at) grayproductions.net>
-    
-    # 
-    # To override the operation of this command for your language add a Preferences
-    # bundle item that defines the following variables as appropriate for your
-    # language:
-    # 
-    #   TM_COMMENT_START - the character string that starts comments, e.g. /*
-    #   TM_COMMENT_END   - the character string that ends comments (if appropriate),
-    #                      e.g. */
-    #   TM_COMMENT_MODE  - the type of comment to use - either 'line' or 'block'
-    # 
-        
-    # find all available comment variables
-    var_suffixes = [""]
+  def Comment.from_env(context)
+    comments = []
+
+    suffixes = ['']
     2.upto(1.0/0.0) do |n|
       if ENV.include? "TM_COMMENT_START_#{n}"
-        var_suffixes << "_#{n}"
+        suffixes << "_#{n}"
       else
         break
       end
     end
-    
-    text    = $stdin.read
-    default = nil  # the comment we will insert, if none are removed
-    
-    # maintain selection
-    if text == ENV["TM_SELECTED_TEXT"]
-      $selected = true
-      print "${1:"
+
+    suffixes.each do |suffix|
+      comments << Comment.new(context,
+      ENV["TM_COMMENT_START#{suffix}"] || "# ",
+      ENV["TM_COMMENT_END#{suffix}"]   || "",
+      ENV["TM_COMMENT_MODE#{suffix}"]  || (ENV["TM_COMMENT_END#{suffix}"] ? :block : :line),
+      ENV["TM_COMMENT_DISABLE_INDENT#{suffix}"])
+    end
+    comments
+  end
+
+  # Are these lines commented according to this comment's type/rules?
+  def commented?(lines)
+    Ruble::Logger.trace "Checking if lines are commented by #{to_s}"
+    commented = true
+    if is_block_mode?
+      # Is the input wrapped in the start and end chars?
+      input = lines.join("\n").strip
+      commented = input.start_with?(@start_chars) and input.end_with?(@end_chars)
     else
-      $selected = false
-    end
-    
-    # try a removal for each comment...
-    var_suffixes.each do |suffix|
-      # build comment
-      com = { :start     => ENV["TM_COMMENT_START#{suffix}"] || "# ",
-              :end       => ENV["TM_COMMENT_END#{suffix}"]   || "",
-              :mode      => ENV["TM_COMMENT_MODE#{suffix}"]  ||
-                            (ENV["TM_COMMENT_END#{suffix}"] ? "block" : "line"),
-              :no_indent => ENV["TM_COMMENT_DISABLE_INDENT#{suffix}"] }
       
-      com[:esc_start], com[:esc_end] = [com[:start], com[:end]].map do |str|
-        str.gsub(/[\\|()\[\].?*+{}^$]/, '\\\\\&').
-            gsub(/\A\s+|\s+\z/, '(?:\&)?')
+      if input_is_selection?
+        # Expand selection to full line?
+        lines = []
+        (context.editor.selection.start_line..context.editor.selection.end_line).each {|line_num| lines << context.editor.line(line_num)}
+        Ruble::Logger.trace "Expanded to: #{lines}"
       end
       
-      # save the first one as our insertion default
-      default = com if default.nil?
-      
-      # try a removal
-      case com[:mode]
-      when "line"  # line by line comment
-        if text !~ /\A[\t ]+\z/ &&
-           text.send(text.respond_to?(:lines) ? :lines : :to_s).
-                map { |l| !!(l =~ /\A\s*(#{com[:esc_start]}|$)/) }.uniq == [true]
-          if $selected
-            out text.gsub( /^(\s*)#{com[:esc_start]}(.*?)#{com[:esc_end]}(\s*)$/,
-                           '\1\2\3' )
-            print "}"
-            exit 0
-          else
-            r = text.sub( /^(\s*)#{com[:esc_start]}(.*?)#{com[:esc_end]}(\s*)$/,
-                          '\1\2\3' )
-            i = ENV["TM_LINE_INDEX"].to_i
-            i = i > text.index(/#{com[:esc_start]}/)            ?
-                [[0, i - com[:start].length].max, r.length].min :
-                [i, r.length].min
-            r[i, 0] = "\0"
-            out r
-            exit 0
-          end
-        end
-      when "block" # block comment
-        regex = /\A(\s*)#{com[:esc_start]}(.*?)#{com[:esc_end]}(\s*)\z/m
-        if text =~ regex
-          text = remove_leading_white_space(text)
-          if $selected
-            out text.sub(regex, '\1\2\3')
-            print "}"
-            exit 0
-          else
-            r = text.sub(regex, '\1\2\3')
-            i = ENV["TM_LINE_INDEX"].to_i
-            i = i > text.index(/#{com[:esc_start]}/)            ?
-                [[0, i - com[:start].length].max, r.length].min :
-                [i, r.length].min
-            r[i, 0] = "\0"
-            out r
-            exit 0
-          end
-        end
+      # Make sure each line starts with the start_chars
+      lines.each do |l|
+        return false if !l.strip.start_with?(@start_chars)
       end
     end
-    
-    # none of our removals worked, so perform an insert (minding indent setting)
-    text[ENV["TM_LINE_INDEX"].to_i, 0] = "\0" unless $selected or text.empty?
-    case default[:mode]
-    when "line"  # apply comment line by line
-      # modify text to expand to include beginning of first line when we're turning comments on in line mode!
-      if $selected
-        line_number = ENV["TM_SELECTION_START_LINE_NUMBER"].to_i - 1
-        line_offset = ENV["TM_LINE_INDEX"].to_i
-        if line_offset > 0
-          prefix = context.editor.line(line_number)[0, line_offset]
-          text = prefix + text
-          cur_selection = context.editor.selection
-          context.editor.selection = [cur_selection.offset - line_offset, cur_selection.length + line_offset]
-        end
+    return commented
+  end
+  
+  def to_s
+    "<#{@start_chars} comment #{@end_chars}, mode: #{@mode}>"
+  end
+
+  def toggle(lines)
+    commented?(lines) ? remove(lines) : add(lines)
+  end
+
+  def remove(lines)
+    Ruble::Logger.trace "Removing comment: #{to_s}"
+    output = ''
+    if is_block_mode?
+      output = lines.join('\n')
+      output = output[(output.index(@start_chars) + @start_chars.size)..-1]
+      output = output[0..output.rindex(@end_chars)]
+    else
+      
+      if input_is_selection?
+        # Expand selection to full line?
+        lines = []
+        (context.editor.selection.start_line..context.editor.selection.end_line).each {|line_num| lines << context.editor.line(line_num)}
+        Ruble::Logger.trace "Expanded to: #{lines}"
       end
-      if text.empty?
-        out "#{default[:start]}\0#{default[:end]}"
-      elsif default[:no_indent]
-        out text.gsub(/^.*$/, "#{default[:start]}\\&#{default[:end]}")
-      elsif text =~ /\A([\t ]*)\0([\t ]*)\z/
-        out text.gsub(/^.*$/, "#{$1}#{default[:start]}#{$2}#{default[:end]}")
+      
+      # take indent before comment start, then stuff after comment
+      lines.each {|l| output << "#{l[0...l.index(@start_chars)]}#{l[(l.index(@start_chars) + @start_chars.size)..-1]}\n" }
+      # Remove extra newline at end
+      output = output[0...-1]
+    end
+
+    context.editor[offset, length] = output
+    return true
+  end
+
+  def add(lines)
+    Ruble::Logger.trace "Adding comment: #{to_s}"
+    output = ''
+    if is_block_mode?
+      # Wrap entire input in start and end characters of this comment type
+      output = "#{@start_chars}#{lines.join('\n')}#{@end_chars}"
+    else
+      
+      if input_is_selection?
+        # Expand selection to full line?
+        lines = []
+        (context.editor.selection.start_line..context.editor.selection.end_line).each {|line_num| lines << context.editor.line(line_num)}
+        Ruble::Logger.trace "Expanded to: #{lines}"
+      end
+      
+      # Prepend the comment beginning to each line, Retain existing indent (that's the index/regexp thing)!
+      lines.each {|l| output << "#{l[0...l.index(/\S/)]}#{@start_chars}#{l[l.index(/\S/)..-1]}\n" }
+      # Remove extra newline at end
+      output = output[0...-1]
+    end
+
+    context.editor[offset, length] = output
+    return true
+  end
+  
+  def document
+    context.editor.document
+  end
+  
+  def offset
+    # Need to calculate offset based on input type, line or selection
+    if input_is_selection?
+      if is_line_mode?
+        context.editor.offset_at_line(context.editor.selection.start_line)
       else
-        indent = text.scan(/^[\t \0]*(?=\S)/).
-                      min { |a, b| a.length <=> b.length } || ""
-        text.send(text.respond_to?(:lines) ? :lines : :to_s).map do |line|
-          if line =~ /^(#{indent})(.*)$(\n?)/ then
-            out $1 + default[:start] + $2 + default[:end] + $3
-          elsif line =~ /^(.*)$(\n?)/ then
-            out indent + default[:start] + $1 + default[:end] + $2
-          end
+        ENV["TM_SELECTION_OFFSET"].to_i
+      end
+    else
+      context.editor.offset_at_line(context.editor.caret_line)
+    end
+  end
+  
+  def length
+    # Need to calculate length based on input type, line or selection
+    if input_is_selection?
+      if is_line_mode?
+        (context.editor.offset_at_line(context.editor.selection.end_line) + context.editor.line(context.editor.selection.end_line).length) - offset
+      else
+        ENV["TM_SELECTION_LENGTH"].to_i
+      end
+    else
+      context.editor.current_line.length
+    end
+  end
+  
+  def is_line_mode?
+    mode.to_sym == :line
+  end
+  
+  def is_block_mode?
+    mode.to_sym == :block
+  end
+  
+  def input_is_selection?
+    context['input_type'].to_sym == :selection
+  end
+end
+
+command 'Comment Line / Selection' do |cmd|
+  cmd.key_binding = 'M1+/'
+  cmd.output = :discard
+  cmd.input = :selection, :line
+  cmd.invoke do |context|
+    Ruble::Logger.log_level = :trace
+    Ruble::Logger.trace "Toggling comment!"
+    Ruble::Logger.trace "Input type: #{context['input_type']}"
+    Ruble::Logger.trace "Input type selection?: #{context['input_type'].to_sym == :selection}"
+    # Take in input. If it spans multiple lines, try to do block commenting, otherwise do normal line commenting
+    input = $stdin.read
+
+    Ruble::Logger.trace "Input: #{input}"
+    lines = input.split(/\r?\n|\r/)
+ 
+    # Ok, now we know which comments we have...
+    comments = Comment.from_env(context)
+    Ruble::Logger.trace "Generated comment types from ENV: #{comments}"
+    
+    # Check if we're selecting multiple lines, if so prefer block comments
+    try_modes = [:line]
+    try_modes.insert(0, :block) if lines.size > 1 # Ok, we have multiple lines, try the block comments first
+
+    # Remove comments if necessary
+    removed_comments = false
+    try_modes.each do |mode|
+      comments.each do |c|
+        next unless c.mode == mode
+
+        if c.commented?(lines)
+          c.remove(lines)
+          removed_comments = true
+          break
         end
       end
-    when "block" # apply comment around selection
-      if text.empty?
-        out default[:start]
-        print "${0}"
-        out default[:end]
-      elsif text =~ /\A([\t ]*)\0([\t ]*)\z/
-        out $1, default[:start]
-        print "${0}"
-        out $2, default[:end]
-      elsif default[:no_indent]
-        out default[:start], remove_leading_white_space(text), default[:end]
-      else
-        lines = text.to_a
-        if lines.empty?
-          out default[:start], default[:end]
-        else
-          lines[-1].sub!(/^(.*)$/, "\\1#{default[:end]}")
-          out lines.shift.sub(/^([\s\0]*)(.*)$/, "\\1#{default[:start]}\\2")
-          out(*lines) unless lines.empty?
-        end
+      break if removed_comments
+    end
+
+    # Looks like we didn't remove, so we need to try adding
+    if !removed_comments
+      # Textmate never adds block comments, so just try line comments
+      # FIXME If we've selected part of a line that has non-whitespace before it, we should probably wrap in block comment!
+      comments.each do |c|
+        next unless c.mode == :line
+
+        break if c.add(lines)
       end
     end
-    print "}" if $selected
-    nil
   end
 end

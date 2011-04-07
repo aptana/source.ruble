@@ -206,17 +206,17 @@ children:
   displayName: Source
   path: bundle.rb
   scope: null
-- !!com.aptana.scripting.model.EnvironmentElement {customProperties: null, displayName: environment-f1ef6004-91b2-433a-9c45-9c3465be910b,
+- !!com.aptana.scripting.model.EnvironmentElement {customProperties: null, displayName: environment-a364e492-f082-4c89-91e1-9ec9c3ef0207,
   path: bundle.rb, scope: source}
 - !!com.aptana.scripting.model.SmartTypingPairsElement
   customProperties: null
-  displayName: smart_typing_pairs-fda830ca-5695-4f35-a2ef-8410509e09e7
+  displayName: smart_typing_pairs-4bcb333e-cdb5-4802-8309-88f80063be6c
   pairs: ['"', '"', (, ), '{', '}', '[', ']', '''', '''', '`', '`']
   path: bundle.rb
   scope: source
 - !!com.aptana.scripting.model.SmartTypingPairsElement
   customProperties: null
-  displayName: smart_typing_pairs-0379f8c7-a779-4f06-9ce4-ed57e9e11457
+  displayName: smart_typing_pairs-83585a63-d33d-4f16-8f46-0c70d2994f1a
   pairs: ['"', '"', (, ), '{', '}', '[', ']']
   path: bundle.rb
   scope: string.quoted.double, comment
@@ -495,7 +495,7 @@ children:
   keyBindingMap:
     !!com.aptana.scripting.model.Platform 'ALL': [M1+/]
   outputPath: null
-  outputType: insert_as_snippet
+  outputType: discard
   path: commands/toggle_comment.rb
   runType: current_thread
   scope: null
