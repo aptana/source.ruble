@@ -74,7 +74,7 @@ class BlockComment < Comment
   def commented?(lines)
     # Is the input wrapped in the start and end chars?
     input = lines.join("\n").strip
-    return input.start_with?(@start_chars) && input.end_with?(@end_chars)
+    return input.start_with?(@start_chars) && input.end_with?(@end_chars.rstrip)
   end
   
   def remove(lines)
@@ -88,6 +88,7 @@ class BlockComment < Comment
   end
   
   def add(lines)
+    Ruble::Logger.trace "Adding block comment: #{to_s}"
     # Wrap entire input in start and end characters of this comment type
     output = "#{@start_chars}#{lines.join('\n')}#{@end_chars}"
 
@@ -142,11 +143,12 @@ class LineComment < Comment
   end
   
   def add(lines)
+    Ruble::Logger.trace "Adding line comment: #{to_s}"
     lines = expanded_lines(lines)
     
     # Prepend the comment beginning to each line, Retain existing indent (that's the index/regexp thing)!
     output = ''
-    lines.each {|l| output << "#{l[0...l.index(/\S/)]}#{@start_chars}#{l[l.index(/\S/)..-1]}\n" }
+    lines.each {|l| next unless l; output << "#{l[0...l.index(/\S/)]}#{@start_chars}#{l[l.index(/\S/)..-1]}\n" }
     # Remove extra newline at end
     output = output[0...-1]
 
@@ -164,7 +166,7 @@ class LineComment < Comment
   
   def length
     if input_is_selection?
-      (context.editor.offset_at_line(context.editor.selection.end_line) + context.editor.line(context.editor.selection.end_line).length) - offset
+      (context.editor.offset_at_line(context.editor.selection.end_line) + (context.editor.line(context.editor.selection.end_line) || '').length) - offset
     else
       context.editor.current_line.length
     end

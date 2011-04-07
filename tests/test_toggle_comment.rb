@@ -138,5 +138,17 @@ class ToggleCommentTest < CommandTestCase
     assert_output_type(:discard)
   end
   
-  # TODO Add test for removing block comment
+  # Add test for removing block comment
+  def test_remove_block_comment_selection_input_spans_multiple_lines_block_mode
+    @context['input_type'] = :selection
+    ENV["TM_COMMENT_START"] = "# "
+    ENV["TM_COMMENT_START_2"] = "=begin\n"
+    ENV["TM_COMMENT_END_2"] = "=end\n"
+    @context.editor.document = "=begin\n Comment here\n=end"
+    @context.editor.selection = Selection.new(0, 26, 1, 4)
+    
+    execute("=begin\n Comment here\n=end")
+    assert_equal(" Comment here\n", @context.editor.document.get)
+    assert_output_type(:discard)
+  end
 end

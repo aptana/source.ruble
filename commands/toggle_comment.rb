@@ -31,6 +31,7 @@ command 'Comment Line / Selection' do |cmd|
         next unless c.mode == mode
 
         if c.commented?(lines)
+          Ruble::Logger.trace "Found comment match, going to remove: #{c}"
           c.remove(lines)
           removed_comments = true
           break
