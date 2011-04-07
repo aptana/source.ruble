@@ -1,12 +1,4 @@
-class Editor
-  def offset_at_line(line)
-    line = line - 1
-    return 0 if line == 0
-    sum = 0
-    lines[0...line].each {|l| sum += l.length + 1 }
-    sum
-  end
-  
+class Editor  
   def selection
     # TODO Check doc to determine line numbers for offsets
     @selection ||= Selection.new(0, 0, 1, 1)
@@ -43,9 +35,13 @@ class Editor
     lines[line_num - 1]
   end
   
+  def offset_at_line(line)
+    document.getLineInformation(line).offset
+  end
+  
   private
   def lines
-    @document.get.split(/\r?\n|\n/)
+    document.lines
   end
 end
 
@@ -72,5 +68,29 @@ class Document
   def []=(offset, length, src)
     @string[offset, length] = src
   end
+  
+  def getLineInformation(line_number)
+    line = lines[line_number - 1]
+    # FIXME Need to properly iterate through @string, counting lines and offsets...
+    Region.new(offset_at_line(line_number), (line || '').length)
+  end
+  
+  def lines
+    get.split(/\r?\n|\n/)
+  end
+  
+  def offset_at_line(line)
+    line = line - 1
+    return 0 if line == 0
+    sum = 0
+    lines[0...line].each {|l| sum += l.length + 1 }
+    sum
+  end
 end
 
+class Region
+  attr_reader :offset, :length
+  def initialize(offset, length)
+    @offset, @length = offset, length
+  end
+end

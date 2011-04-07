@@ -22,7 +22,12 @@ command 'Comment Line / Selection' do |cmd|
     
     # Check if we're selecting multiple lines, if so prefer block comments
     try_modes = [:line]
-    try_modes.insert(0, :block) if lines.size > 1 # Ok, we have multiple lines, try the block comments first
+    if lines.size > 1
+      # Ok, we have multiple lines, try the block comments first
+      try_modes.insert(0, :block)
+    else
+      try_modes << :block
+    end
 
     # Remove comments if necessary
     removed_comments = false
@@ -42,12 +47,18 @@ command 'Comment Line / Selection' do |cmd|
 
     # Looks like we didn't remove, so we need to try adding
     if !removed_comments
-      # Textmate never adds block comments, so just try line comments
-      # FIXME If we've selected part of a line that has non-whitespace before it, we should probably wrap in block comment!
-      comments.each do |c|
-        next unless c.mode == :line
-
-        break if c.add(lines)
+      added_comments = false
+      # try line comments first
+      [:line, :block].each do |mode|
+        comments.each do |c|
+          next unless c.mode == mode
+  
+          if c.add(lines)
+            added_comments = true
+            break
+          end
+        end
+        break if added_comments
       end
     end
   end

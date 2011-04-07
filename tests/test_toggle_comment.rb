@@ -9,6 +9,9 @@ class ToggleCommentTest < CommandTestCase
 
   def teardown
     ENV["TM_COMMENT_START"] = nil
+    ENV["TM_COMMENT_END"] = nil
+    ENV["TM_COMMENT_START_2"] = nil
+    ENV["TM_COMMENT_END_2"] = nil
     ENV["TM_SELECTION_OFFSET"] = nil
     ENV["TM_SELECTION_LENGTH"] = nil
     @context['input_type'] = nil
@@ -139,16 +142,40 @@ class ToggleCommentTest < CommandTestCase
   end
   
   # Add test for removing block comment
-  def test_remove_block_comment_selection_input_spans_multiple_lines_block_mode
-    @context['input_type'] = :selection
-    ENV["TM_COMMENT_START"] = "# "
-    ENV["TM_COMMENT_START_2"] = "=begin\n"
-    ENV["TM_COMMENT_END_2"] = "=end\n"
-    @context.editor.document = "=begin\n Comment here\n=end"
-    @context.editor.selection = Selection.new(0, 26, 1, 4)
+  # def test_remove_block_comment_selection_input_spans_multiple_lines_block_mode
+  #   @context['input_type'] = :selection
+  #   ENV["TM_COMMENT_START"] = "# "
+  #   ENV["TM_COMMENT_START_2"] = "=begin\n"
+  #   ENV["TM_COMMENT_END_2"] = "=end\n"
+  #   @context.editor.document = "=begin\n Comment here\n=end"
+  #   @context.editor.selection = Selection.new(0, 26, 1, 4)
+  #   
+  #   execute("=begin\n Comment here\n=end")
+  #   assert_equal(" Comment here\n", @context.editor.document.get)
+  #   assert_output_type(:discard)
+  # end
+  
+  def test_add_block_comment_line_input
+    @context['input_type'] = :line
+    ENV["TM_COMMENT_START"] = "<!-- "
+    ENV["TM_COMMENT_END"] = " -->"
+    @context.editor.document = "Comment here"
+    @context.editor.selection = Selection.new(0, 0, 1, 1)
     
-    execute("=begin\n Comment here\n=end")
-    assert_equal(" Comment here\n", @context.editor.document.get)
+    execute("Comment here")
+    assert_equal("<!-- Comment here -->", @context.editor.document.get)
+    assert_output_type(:discard)
+  end
+  
+  def test_remove_block_comment_line_input
+    @context['input_type'] = :line
+    ENV["TM_COMMENT_START"] = "<!-- "
+    ENV["TM_COMMENT_END"] = " -->"
+    @context.editor.document = "<!-- Comment here -->"
+    @context.editor.selection = Selection.new(0, 0, 1, 1)
+    
+    execute("<!-- Comment here -->")
+    assert_equal("Comment here", @context.editor.document.get)
     assert_output_type(:discard)
   end
 end

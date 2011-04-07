@@ -78,10 +78,10 @@ class BlockComment < Comment
   end
   
   def remove(lines)
-    output = ''
     output = lines.join('\n')
-    output = output[(output.index(@start_chars) + @start_chars.size)..-1]
-    output = output[0..output.rindex(@end_chars)]
+    Ruble::Logger.trace output
+    output = output[(output.index(@start_chars) + @start_chars.size)...output.rindex(@end_chars)]
+    Ruble::Logger.trace output
 
     context.editor[offset, length] = output
     return true
@@ -90,7 +90,7 @@ class BlockComment < Comment
   def add(lines)
     Ruble::Logger.trace "Adding block comment: #{to_s}"
     # Wrap entire input in start and end characters of this comment type
-    output = "#{@start_chars}#{lines.join('\n')}#{@end_chars}"
+    output = "#{@start_chars}#{lines.join("\n")}#{@end_chars}"
 
     context.editor[offset, length] = output
     return true
@@ -108,7 +108,9 @@ class BlockComment < Comment
     if input_is_selection?
       ENV["TM_SELECTION_LENGTH"].to_i
     else
-      context.editor.current_line.length
+      region = context.editor.document.getLineInformation(context.editor.caret_line)
+      region.length
+      #context.editor.line_information(context.editor.caret_line).length
     end
   end
   
