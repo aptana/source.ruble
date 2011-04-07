@@ -5,7 +5,7 @@ command 'Comment Line / Selection' do |cmd|
   cmd.output = :discard
   cmd.input = :selection, :line
   cmd.invoke do |context|
-    Ruble::Logger.log_level = :trace
+    # Ruble::Logger.log_level = :trace
     Ruble::Logger.trace "Toggling comment!"
     Ruble::Logger.trace "Input type: #{context['input_type']}"
     Ruble::Logger.trace "Input type selection?: #{context['input_type'].to_sym == :selection}"
