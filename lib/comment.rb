@@ -150,7 +150,15 @@ class LineComment < Comment
     
     # Prepend the comment beginning to each line, Retain existing indent (that's the index/regexp thing)!
     output = ''
-    lines.each {|l| next unless l; output << "#{l[0...l.index(/\S/)]}#{@start_chars}#{l[l.index(/\S/)..-1]}\n" }
+    lines.each do |l|
+      next unless l
+      index = l.index(/\S/)
+      if index
+        output << "#{l[0...index]}#{@start_chars}#{l[index..-1]}\n"
+      else
+        output << "#{@start_chars}#{l}\n"
+      end
+    end
     # Remove extra newline at end
     output = output[0...-1]
 
