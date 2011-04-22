@@ -152,6 +152,39 @@ class ToggleCommentTest < CommandTestCase
     assert_output_type(:discard)
   end
   
+  def test_add_line_comment_on_empty_line
+    @context['input_type'] = :line
+    ENV["TM_COMMENT_START"] = "# "
+    @context.editor.document = ""
+    @context.editor.selection = Selection.new(0, 0, 1, 1)
+    
+    execute("")
+    assert_equal("# ", @context.editor.document.get)
+    assert_output_type(:discard)
+  end
+  
+  def test_remove_line_comment_on_whitespace_only_line
+    @context['input_type'] = :line
+    ENV["TM_COMMENT_START"] = "// "
+    @context.editor.document = "// "
+    @context.editor.selection = Selection.new(0, 0, 1, 1)
+    
+    execute("// ")
+    assert_equal("", @context.editor.document.get)
+    assert_output_type(:discard)
+  end
+  
+  def test_remove_line_comment_with_removed_trailing_whitespace
+    @context['input_type'] = :line
+    ENV["TM_COMMENT_START"] = "// "
+    @context.editor.document = "//"
+    @context.editor.selection = Selection.new(0, 0, 1, 1)
+    
+    execute("//")
+    assert_equal("", @context.editor.document.get)
+    assert_output_type(:discard)
+  end
+  
   # Add test for removing block comment
   # def test_remove_block_comment_selection_input_spans_multiple_lines_block_mode
   #   @context['input_type'] = :selection

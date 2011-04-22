@@ -124,9 +124,10 @@ class LineComment < Comment
 
   def commented?(lines)
     lines = expanded_lines(lines)
+    return false if lines.empty?
     
     # Make sure each line starts with the start_chars
-    lines.each { |l| return false if !l.strip.start_with?(@start_chars) }
+    lines.each { |l| return false if l.lstrip.length == 0 || !l.lstrip.start_with?(@start_chars.rstrip) }
     
     return true
   end
@@ -136,7 +137,15 @@ class LineComment < Comment
     
     # take indent before comment start, then stuff after comment
     output = ''
-    lines.each {|l| output << "#{l[0...l.index(@start_chars)]}#{l[(l.index(@start_chars) + @start_chars.size)..-1]}\n" }
+    lines.each do |l|
+      index = l.index(@start_chars.rstrip)
+      # If the whitespace after comment chars is removed, we should just remove the part without whitespace
+      if l.size < @start_chars.size
+        output << "\n"
+      else
+        output << "#{l[0...index]}#{l[(index + @start_chars.size)..-1]}\n"
+      end
+    end
     # Remove extra newline at end
     output = output[0...-1]
 
@@ -148,20 +157,24 @@ class LineComment < Comment
     Ruble::Logger.trace "Adding line comment: #{to_s}"
     lines = expanded_lines(lines)
     
-    # Prepend the comment beginning to each line, Retain existing indent (that's the index/regexp thing)!
     output = ''
-    lines.each do |l|
-      next unless l
-      index = l.index(/\S/)
-      if index
-        output << "#{l[0...index]}#{@start_chars}#{l[index..-1]}\n"
-      else
-        output << "#{@start_chars}#{l}\n"
+    if lines.empty?
+      output = @start_chars
+    else
+      # Prepend the comment beginning to each line, Retain existing indent (that's the index/regexp thing)!
+      lines.each do |l|
+        next unless l
+        index = l.index(/\S/)
+        if index
+          output << "#{l[0...index]}#{@start_chars}#{l[index..-1]}\n"
+        else
+          output << "#{@start_chars}#{l}\n"
+        end
       end
+      # Remove extra newline at end
+      output = output[0...-1]
     end
-    # Remove extra newline at end
-    output = output[0...-1]
-
+    
     context.editor[offset, length] = output
     return true
   end
@@ -178,7 +191,7 @@ class LineComment < Comment
     if input_is_selection?
       (context.editor.offset_at_line(context.editor.selection.end_line) + (context.editor.line(context.editor.selection.end_line) || '').length) - offset
     else
-      context.editor.current_line.length
+      (context.editor.current_line || '').length
     end
   end
   
