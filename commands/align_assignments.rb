@@ -1,7 +1,7 @@
 require 'ruble'
 
 command 'Align Assignments' do |cmd|
-  cmd.key_binding = 'OPTION+COMMAND+]'
+  cmd.key_binding = 'M1+M3+]'
   cmd.output = :replace_selection
   cmd.input = :selection, :document
   cmd.invoke do

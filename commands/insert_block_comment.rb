@@ -1,7 +1,7 @@
 require 'ruble'
 
 command 'Insert Block Comment' do |cmd|
-  cmd.key_binding = 'OPTION+COMMAND+/'
+  cmd.key_binding = 'M1+M3+/'
   cmd.output = :insert_as_snippet
   cmd.input = :selection, :none
   cmd.invoke do |context|
