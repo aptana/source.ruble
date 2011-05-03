@@ -1,174 +1,6 @@
 !!com.aptana.scripting.model.BundleElement
 author: Christopher Williams
 children:
-- !command
-  async: false
-  customProperties:
-    prefix_values: [head]
-  displayName: Insert Comment Header
-  input: [none]
-  inputPath: null
-  keyBindingMap: null
-  outputPath: null
-  outputType: insert_as_snippet
-  path: commands/insert_source_header.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !command
-  async: false
-  customProperties: null
-  displayName: and Insert LF
-  input: [line]
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [M1+ENTER]
-  outputPath: null
-  outputType: discard
-  path: commands/move_to_eol_and_insert_lf.rb
-  runType: current_thread
-  scope: source
-  workingDirectoryType: UNDEFINED
-- !command
-  async: false
-  customProperties: null
-  displayName: and Insert Terminator
-  input: [selection, line]
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [M1+M3+ENTER]
-  outputPath: null
-  outputType: insert_as_snippet
-  path: commands/move_to_eol_and_insert_terminator.rb
-  runType: current_thread
-  scope: source
-  workingDirectoryType: UNDEFINED
-- !command
-  async: false
-  customProperties: null
-  displayName: and Insert Terminator + LF
-  input: [line]
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [M1+M2+ENTER]
-  outputPath: null
-  outputType: discard
-  path: commands/move_to_eol_and_insert_terminator_and_lf.rb
-  runType: current_thread
-  scope: source
-  workingDirectoryType: UNDEFINED
-- !command
-  async: false
-  customProperties: null
-  displayName: Reformat Comment
-  input: [selection, undefined]
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [CONTROL+Q]
-  outputPath: null
-  outputType: insert_as_snippet
-  path: commands/reformat_comment.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !command
-  async: false
-  customProperties: null
-  displayName: Toggle camelCase / snake_case / PascalCase
-  input: [selection, word]
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [CONTROL+M2+-]
-  outputPath: null
-  outputType: replace_selection
-  path: commands/toggle_camelcase_vs_underscore.rb
-  runType: current_thread
-  scope: source
-  workingDirectoryType: UNDEFINED
-- !command
-  async: false
-  customProperties: null
-  displayName: Toggle Single / Double String Quotes
-  input: [selection, undefined]
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [CONTROL+M2+']
-  outputPath: null
-  outputType: replace_selection
-  path: commands/toggle_single_double_string_quotes.rb
-  runType: current_thread
-  scope: string.quoted.single, string.quoted.double
-  workingDirectoryType: UNDEFINED
-- !command
-  async: false
-  customProperties: null
-  displayName: Newline - \n
-  input: [none]
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [CONTROL+ENTER]
-  outputPath: null
-  outputType: insert_as_snippet
-  path: snippets/snippets.rb
-  runType: current_thread
-  scope: source
-  workingDirectoryType: UNDEFINED
-- !command
-  async: false
-  customProperties: null
-  displayName: Double Quotes - \"...\"
-  input: [none]
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+']
-  outputPath: null
-  outputType: insert_as_snippet
-  path: snippets/snippets.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !command
-  async: false
-  customProperties: null
-  displayName: Single Quotes - \'...\'
-  input: [none]
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+']
-  outputPath: null
-  outputType: insert_as_snippet
-  path: snippets/snippets.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !command
-  async: false
-  customProperties: null
-  displayName: Insert Comment Banner
-  input: [none]
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [CONTROL+SHIFT+B]
-  outputPath: null
-  outputType: insert_as_snippet
-  path: snippets/snippets.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: Comment Line / Selection
-  input: [selection, line]
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [M1+/]
-  outputPath: null
-  outputType: discard
-  path: commands/toggle_comment.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
 - !!com.aptana.scripting.model.MenuElement
   children:
   - children:
@@ -374,45 +206,31 @@ children:
   displayName: Source
   path: bundle.rb
   scope: null
-- !!com.aptana.scripting.model.EnvironmentElement {customProperties: null, displayName: environment-1cb4e1f3-a2a7-4eaf-85e2-265b3ad37e3c,
+- !!com.aptana.scripting.model.EnvironmentElement {customProperties: null, displayName: environment-21854a42-0c79-46d4-bf70-cbbc5d0e587e,
   path: bundle.rb, scope: source}
 - !!com.aptana.scripting.model.SmartTypingPairsElement
   customProperties: null
-  displayName: smart_typing_pairs-938e57fb-7345-44cf-995c-9f2f9b29f611
+  displayName: smart_typing_pairs-0ef73b66-209b-401f-a447-36c9238f70f5
   pairs: ['"', '"', (, ), '{', '}', '[', ']', '''', '''', '`', '`']
   path: bundle.rb
   scope: source
 - !!com.aptana.scripting.model.SmartTypingPairsElement
   customProperties: null
-  displayName: smart_typing_pairs-fea9e819-a5bf-4b6d-9082-8b2b43944ed3
+  displayName: smart_typing_pairs-8b7f748b-3d12-44f1-aadf-a89cbb408195
   pairs: ['"', '"', (, ), '{', '}', '[', ']']
   path: bundle.rb
   scope: string.quoted.double, comment
 - !!com.aptana.scripting.model.CommandElement
   async: false
   customProperties: null
-  displayName: Insert Block Comment
-  input: [selection, none]
+  displayName: Align Assignments
+  input: [selection, document]
   inputPath: null
   keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [M1+M3+/]
+    !!com.aptana.scripting.model.Platform 'ALL': ['OPTION+COMMAND+]']
   outputPath: null
-  outputType: insert_as_snippet
-  path: commands/insert_block_comment.rb
-  runType: current_thread
-  scope: null
-  workingDirectoryType: UNDEFINED
-- !!com.aptana.scripting.model.CommandElement
-  async: false
-  customProperties: null
-  displayName: Convert Spaces to Tabs (Estimating Indent)
-  input: [document]
-  inputPath: null
-  keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [M1+M2+M4+T]
-  outputPath: null
-  outputType: replace_document
-  path: commands/tabify.rb
+  outputType: replace_selection
+  path: commands/align_assignments.rb
   runType: current_thread
   scope: null
   workingDirectoryType: UNDEFINED
@@ -423,7 +241,7 @@ children:
   input: [none]
   inputPath: null
   keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [M1+M3+0]
+    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+0]
   outputPath: null
   outputType: discard
   path: commands/folding.rb
@@ -437,7 +255,7 @@ children:
   input: [none]
   inputPath: null
   keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [M1+M3+1]
+    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+1]
   outputPath: null
   outputType: discard
   path: commands/folding.rb
@@ -451,7 +269,7 @@ children:
   input: [none]
   inputPath: null
   keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [M1+M3+2]
+    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+2]
   outputPath: null
   outputType: discard
   path: commands/folding.rb
@@ -465,7 +283,7 @@ children:
   input: [none]
   inputPath: null
   keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [M1+M3+3]
+    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+3]
   outputPath: null
   outputType: discard
   path: commands/folding.rb
@@ -479,7 +297,7 @@ children:
   input: [none]
   inputPath: null
   keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [M1+M3+4]
+    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+4]
   outputPath: null
   outputType: discard
   path: commands/folding.rb
@@ -493,7 +311,7 @@ children:
   input: [none]
   inputPath: null
   keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [M1+M3+5]
+    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+5]
   outputPath: null
   outputType: discard
   path: commands/folding.rb
@@ -507,7 +325,7 @@ children:
   input: [none]
   inputPath: null
   keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [M1+M3+6]
+    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+6]
   outputPath: null
   outputType: discard
   path: commands/folding.rb
@@ -521,7 +339,7 @@ children:
   input: [none]
   inputPath: null
   keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [M1+M3+7]
+    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+7]
   outputPath: null
   outputType: discard
   path: commands/folding.rb
@@ -535,7 +353,7 @@ children:
   input: [none]
   inputPath: null
   keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [M1+M3+8]
+    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+8]
   outputPath: null
   outputType: discard
   path: commands/folding.rb
@@ -549,16 +367,212 @@ children:
   input: [none]
   inputPath: null
   keyBindingMap:
-    !!com.aptana.scripting.model.Platform 'ALL': [M1+M3+9]
+    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+9]
   outputPath: null
   outputType: discard
   path: commands/folding.rb
   runType: current_thread
   scope: null
   workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.CommandElement
+  async: false
+  customProperties: null
+  displayName: Insert Block Comment
+  input: [selection, none]
+  inputPath: null
+  keyBindingMap:
+    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+/]
+  outputPath: null
+  outputType: insert_as_snippet
+  path: commands/insert_block_comment.rb
+  runType: current_thread
+  scope: null
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.CommandElement
+  async: false
+  customProperties:
+    prefix_values: [head]
+  displayName: Insert Comment Header
+  input: [none]
+  inputPath: null
+  keyBindingMap: null
+  outputPath: null
+  outputType: insert_as_snippet
+  path: commands/insert_source_header.rb
+  runType: current_thread
+  scope: null
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.CommandElement
+  async: false
+  customProperties: null
+  displayName: and Insert LF
+  input: [line]
+  inputPath: null
+  keyBindingMap:
+    !!com.aptana.scripting.model.Platform 'ALL': [M1+ENTER]
+  outputPath: null
+  outputType: discard
+  path: commands/move_to_eol_and_insert_lf.rb
+  runType: current_thread
+  scope: source
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.CommandElement
+  async: false
+  customProperties: null
+  displayName: and Insert Terminator
+  input: [selection, line]
+  inputPath: null
+  keyBindingMap:
+    !!com.aptana.scripting.model.Platform 'ALL': [M1+M3+ENTER]
+  outputPath: null
+  outputType: insert_as_snippet
+  path: commands/move_to_eol_and_insert_terminator.rb
+  runType: current_thread
+  scope: source
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.CommandElement
+  async: false
+  customProperties: null
+  displayName: and Insert Terminator + LF
+  input: [line]
+  inputPath: null
+  keyBindingMap:
+    !!com.aptana.scripting.model.Platform 'ALL': [M1+M2+ENTER]
+  outputPath: null
+  outputType: discard
+  path: commands/move_to_eol_and_insert_terminator_and_lf.rb
+  runType: current_thread
+  scope: source
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.CommandElement
+  async: false
+  customProperties: null
+  displayName: Reformat Comment
+  input: [selection, undefined]
+  inputPath: null
+  keyBindingMap:
+    !!com.aptana.scripting.model.Platform 'ALL': [CONTROL+Q]
+  outputPath: null
+  outputType: insert_as_snippet
+  path: commands/reformat_comment.rb
+  runType: current_thread
+  scope: null
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.CommandElement
+  async: false
+  customProperties: null
+  displayName: Convert Spaces to Tabs (Estimating Indent)
+  input: [document]
+  inputPath: null
+  keyBindingMap:
+    !!com.aptana.scripting.model.Platform 'ALL': [CONTROL+SHIFT+COMMAND+T]
+  outputPath: null
+  outputType: replace_document
+  path: commands/tabify.rb
+  runType: current_thread
+  scope: null
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.CommandElement
+  async: false
+  customProperties: null
+  displayName: Toggle camelCase / snake_case / PascalCase
+  input: [selection, word]
+  inputPath: null
+  keyBindingMap:
+    !!com.aptana.scripting.model.Platform 'ALL': [CONTROL+M2+-]
+  outputPath: null
+  outputType: replace_selection
+  path: commands/toggle_camelcase_vs_underscore.rb
+  runType: current_thread
+  scope: source
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.CommandElement
+  async: false
+  customProperties: null
+  displayName: Comment Line / Selection
+  input: [selection, line]
+  inputPath: null
+  keyBindingMap:
+    !!com.aptana.scripting.model.Platform 'ALL': [M1+/]
+  outputPath: null
+  outputType: discard
+  path: commands/toggle_comment.rb
+  runType: current_thread
+  scope: null
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.CommandElement
+  async: false
+  customProperties: null
+  displayName: Toggle Single / Double String Quotes
+  input: [selection, undefined]
+  inputPath: null
+  keyBindingMap:
+    !!com.aptana.scripting.model.Platform 'ALL': [CONTROL+M2+']
+  outputPath: null
+  outputType: replace_selection
+  path: commands/toggle_single_double_string_quotes.rb
+  runType: current_thread
+  scope: string.quoted.single, string.quoted.double
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.CommandElement
+  async: false
+  customProperties: null
+  displayName: Newline - \n
+  input: [none]
+  inputPath: null
+  keyBindingMap:
+    !!com.aptana.scripting.model.Platform 'ALL': [CONTROL+ENTER]
+  outputPath: null
+  outputType: insert_as_snippet
+  path: snippets/snippets.rb
+  runType: current_thread
+  scope: source
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.CommandElement
+  async: false
+  customProperties: null
+  displayName: Double Quotes - \"...\"
+  input: [none]
+  inputPath: null
+  keyBindingMap:
+    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+']
+  outputPath: null
+  outputType: insert_as_snippet
+  path: snippets/snippets.rb
+  runType: current_thread
+  scope: null
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.CommandElement
+  async: false
+  customProperties: null
+  displayName: Single Quotes - \'...\'
+  input: [none]
+  inputPath: null
+  keyBindingMap:
+    !!com.aptana.scripting.model.Platform 'ALL': [OPTION+COMMAND+']
+  outputPath: null
+  outputType: insert_as_snippet
+  path: snippets/snippets.rb
+  runType: current_thread
+  scope: null
+  workingDirectoryType: UNDEFINED
+- !!com.aptana.scripting.model.CommandElement
+  async: false
+  customProperties: null
+  displayName: Insert Comment Banner
+  input: [none]
+  inputPath: null
+  keyBindingMap:
+    !!com.aptana.scripting.model.Platform 'ALL': [CONTROL+SHIFT+B]
+  outputPath: null
+  outputType: insert_as_snippet
+  path: snippets/snippets.rb
+  runType: current_thread
+  scope: null
+  workingDirectoryType: UNDEFINED
 copyright: Copyright 2010 Aptana Inc. Distributed under the MIT license.
 customProperties: null
-decreaseIndentMarkers: {}
+decreaseIndentMarkers: &id002 {}
 description: 'A port of the TextMate bundle.
 
 
@@ -567,11 +581,11 @@ description: 'A port of the TextMate bundle.
 
   '
 displayName: Source
-fileTypeRegistry: {}
-fileTypes: []
-foldingStartMarkers: {}
-foldingStopMarkers: {}
-increaseIndentMarkers: {}
+fileTypeRegistry: *id002
+fileTypes: *id001
+foldingStartMarkers: *id002
+foldingStopMarkers: *id002
+increaseIndentMarkers: *id002
 license: null
 licenseUrl: null
 path: bundle.rb

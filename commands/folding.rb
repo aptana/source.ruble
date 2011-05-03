@@ -27,7 +27,7 @@ def toggle_folding(editor, level)
 end
 
 # Toggle Folding levels explicitly
-with_defaults :input => :none, :output => :discard, :key_binding => "M1+M3+0" do
+with_defaults :input => :none, :output => :discard, :key_binding => "OPTION+COMMAND+0" do
   command 'All Levels' do |cmd|
     cmd.invoke do |context|
       # Toggle all levels
@@ -37,7 +37,7 @@ with_defaults :input => :none, :output => :discard, :key_binding => "M1+M3+0" do
   
   1.upto(9).each do |level|
     command level.to_s do |cmd|
-      cmd.key_binding = "M1+M3+" + level.to_s
+      cmd.key_binding = "OPTION+COMMAND+" + level.to_s
       cmd.invoke {|context| toggle_folding(context.editor, level) }
     end
   end  
