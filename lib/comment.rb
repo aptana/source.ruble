@@ -143,7 +143,11 @@ class LineComment < Comment
       if l.size < @start_chars.size
         output << "\n"
       else
-        output << "#{l[0...index]}#{l[(index + @start_chars.size)..-1]}\n"
+        if l.index(@start_chars)
+          output << "#{l[0...index]}#{l[(index + @start_chars.size)..-1]}\n"
+        else
+          output << "#{l[0...index]}#{l[(index + @start_chars.rstrip.size)..-1]}\n"
+        end
       end
     end
     # Remove extra newline at end
