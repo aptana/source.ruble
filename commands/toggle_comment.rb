@@ -1,7 +1,7 @@
 require 'ruble'
 
 command 'Comment Line / Selection' do |cmd|
-  cmd.key_binding = 'M1+/'
+  cmd.key_binding = ["M1+/", "M1+7", "M1+M2+C"]
   cmd.output = :discard
   cmd.input = :selection, :line
   cmd.invoke do |context|
