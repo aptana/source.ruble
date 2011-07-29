@@ -3,7 +3,7 @@ require 'ruble'
 
 bundle do |bundle|
   bundle.author = 'Christopher Williams'
-  bundle.copyright = "Copyright 2010 Aptana Inc. Distributed under the MIT license."
+  bundle.copyright = "Copyright 2011 Appcelerator Inc. Distributed under the MIT license."
   bundle.display_name = 'Source'
   bundle.description =  <<END
 A port of the TextMate bundle.
