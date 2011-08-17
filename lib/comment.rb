@@ -78,12 +78,15 @@ class BlockComment < Comment
   end
   
   def remove(lines)
-    output = lines.join('\n')
+    output = lines.join("\n")
     Ruble::Logger.trace output
     output = output[(output.index(@start_chars) + @start_chars.size)...output.rindex(@end_chars)]
     Ruble::Logger.trace output
 
     context.editor[offset, length] = output
+    # Retain selection!
+    context.editor.selection = [offset, output.length]
+
     return true
   end
   
@@ -93,6 +96,9 @@ class BlockComment < Comment
     output = "#{@start_chars}#{lines.join("\n")}#{@end_chars}"
 
     context.editor[offset, length] = output
+    # Retain selection!
+    context.editor.selection = [offset, output.length]
+
     return true
   end
   
