@@ -29,6 +29,8 @@ class ToggleCommentTest < CommandTestCase
     execute("Comment here")
     assert_equal("# Comment here", @context.editor.document.get)
     assert_output_type(:discard)
+    # Select lines we uncommented
+    assert_equal(Selection.new(0, 14, 1, 1), @context.editor.selection)
   end
   
   # Remove a line comment from selected text
@@ -41,6 +43,8 @@ class ToggleCommentTest < CommandTestCase
     execute("# Comment here")
     assert_equal("Comment here", @context.editor.document.get)
     assert_output_type(:discard)
+    # Select lines we uncommented
+    assert_equal(Selection.new(0, 12, 1, 1), @context.editor.selection)
   end
   
   # Add test for adding line comment when selection in middle of line
@@ -53,6 +57,8 @@ class ToggleCommentTest < CommandTestCase
     execute("ment")
     assert_equal("# Comment here", @context.editor.document.get)
     assert_output_type(:discard)
+    # Select lines we commented
+    assert_equal(Selection.new(0, 14, 1, 1), @context.editor.selection)
   end
   
   # Add test for removing line comment when selection in middle of line
@@ -65,6 +71,8 @@ class ToggleCommentTest < CommandTestCase
     execute("mmen")
     assert_equal("Comment here", @context.editor.document.get)
     assert_output_type(:discard)
+    # Select lines we uncommented
+    assert_equal(Selection.new(0, 12, 1, 1), @context.editor.selection)
   end
   
   # Add test for adding line comment when selection spans multiple lines
@@ -77,6 +85,8 @@ class ToggleCommentTest < CommandTestCase
     execute("Comment here\nComment continued")
     assert_equal("# Comment here\n# Comment continued", @context.editor.document.get)
     assert_output_type(:discard)
+    # Select lines we uncommented
+    assert_equal(Selection.new(0, 34, 1, 2), @context.editor.selection)
   end
   
   # Add test for removing line comment when selection spans multiple lines
@@ -89,6 +99,8 @@ class ToggleCommentTest < CommandTestCase
     execute("# Comment here\n# Comment continued")
     assert_equal("Comment here\nComment continued", @context.editor.document.get)
     assert_output_type(:discard)
+    # Select lines we uncommented
+    assert_equal(Selection.new(0, 30, 1, 2), @context.editor.selection)
   end
   
   # Add test adding comment when selection is multiple lines, but starts and ends mid line
@@ -101,6 +113,8 @@ class ToggleCommentTest < CommandTestCase
     execute("ment here\nComment contin")
     assert_equal("# Comment here\n# Comment continued", @context.editor.document.get)
     assert_output_type(:discard)
+    # Select lines we commented
+    assert_equal(Selection.new(0, 34, 1, 2), @context.editor.selection)
   end
   
   # Add test removing comment when selection is multiple lines, but starts and ends mid line
@@ -113,6 +127,8 @@ class ToggleCommentTest < CommandTestCase
     execute("omment here\n# Comment contin")
     assert_equal("Comment here\nComment continued", @context.editor.document.get)
     assert_output_type(:discard)
+    # Select lines we uncommented
+    assert_equal(Selection.new(0, 30, 1, 2), @context.editor.selection)
   end
   
   # TODO Add tests for when the content is indented, that we retain it!
@@ -127,6 +143,21 @@ class ToggleCommentTest < CommandTestCase
     execute("Comment here")
     assert_equal("# Comment here", @context.editor.document.get)
     assert_output_type(:discard)
+    # When offset is at beginning of line and no selection, we select the comment we added
+    assert_equal(Selection.new(0, 2, 1, 1), @context.editor.selection)
+  end
+  
+  def test_add_comment_line_input_line_mode_caret_mid_line
+    @context['input_type'] = :line
+    ENV["TM_COMMENT_START"] = "# "
+    @context.editor.document = "Comment here"
+    @context.editor.selection = Selection.new(3, 0, 1, 1)
+    
+    execute("Comment here")
+    assert_equal("# Comment here", @context.editor.document.get)
+    assert_output_type(:discard)
+    # Keep caret at same place in text (ignoring added comment prefix)
+    assert_equal(Selection.new(5, 0, 1, 1), @context.editor.selection)
   end
   
   # Add test for removing line comment with line input
@@ -139,6 +170,21 @@ class ToggleCommentTest < CommandTestCase
     execute("# Comment here")
     assert_equal("Comment here", @context.editor.document.get)
     assert_output_type(:discard)
+    # When offset is at beginning of line and no selection, we keep caret at beginning of line
+    assert_equal(Selection.new(0, 0, 1, 1), @context.editor.selection)
+  end
+  
+  def test_remove_comment_line_input_line_mode_caret_mid_line
+    @context['input_type'] = :line
+    ENV["TM_COMMENT_START"] = "# "
+    @context.editor.document = "# Comment here"
+    @context.editor.selection = Selection.new(5, 0, 1, 1)
+    
+    execute("# Comment here")
+    assert_equal("Comment here", @context.editor.document.get)
+    assert_output_type(:discard)
+    # When caret is mid-line, retain it's position (ignoring removed comment prefix)
+    assert_equal(Selection.new(3, 0, 1, 1), @context.editor.selection)
   end
   
   def test_add_line_comment_on_whitespace_only_line
@@ -233,4 +279,6 @@ class ToggleCommentTest < CommandTestCase
     assert_equal("Comment here", @context.editor.document.get)
     assert_output_type(:discard)
   end
+  
+  # TODO Add tests that we retain selection after removing or adding comments, block and line
 end

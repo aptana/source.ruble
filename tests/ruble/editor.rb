@@ -5,10 +5,16 @@ class Editor
   end
   
   def selection=(sel)
-    @selection = sel
+    if sel.respond_to? :size
+      offset = sel.first
+      length = sel.last
+      @selection = Selection.new(offset, length, document.line_at_offset(offset), document.line_at_offset(offset + length))
+    else
+      @selection = sel
+    end
     
-    ENV["TM_SELECTION_OFFSET"] = sel.offset.to_s
-    ENV["TM_SELECTION_LENGTH"] = sel.length.to_s
+    ENV["TM_SELECTION_OFFSET"] = @selection.offset.to_s
+    ENV["TM_SELECTION_LENGTH"] = @selection.length.to_s
   end
   
   def []=(offset, length, src)
@@ -39,6 +45,10 @@ class Editor
     document.getLineInformation(line).offset
   end
   
+  def caret_column
+    selection.offset - offset_at_line(selection.start_line)
+  end
+  
   private
   def lines
     document.lines
@@ -53,6 +63,13 @@ class Selection
     @offset, @length = offset, length
     @start_line, @end_line = start_line, end_line
   end
+  
+  def ==(other_selection)
+    self.offset == other_selection.offset &&
+      self.length == other_selection.length &&
+      self.start_line == other_selection.start_line &&
+      self.end_line == other_selection.end_line
+  end
 end
 
 
@@ -61,8 +78,13 @@ class Document
     @string = str
   end
   
-  def get
+  def get(offset = nil, length = nil)
     @string ||= ''
+    if offset && length
+      @string[offset..(offset + length)]
+    else
+      @string
+    end
   end
   
   def []=(offset, length, src)
@@ -85,6 +107,10 @@ class Document
     sum = 0
     lines[0...line].each {|l| sum += l.length + 1 }
     sum
+  end
+  
+  def line_at_offset(offset)
+    get(0, offset).split(/\r?\n|\n/).length
   end
 end
 

@@ -158,8 +158,17 @@ class LineComment < Comment
     end
     # Remove extra newline at end
     output = output[0...-1]
-
-    context.editor[offset, length] = output
+    # Offset's value will change once we edit the contents...
+    replace_start = offset
+    selection_offset = context.editor.selection.offset
+    context.editor[replace_start, length] = output
+    if input_is_selection?
+      # Select the uncommented code
+      context.editor.selection = [replace_start, output.length]
+    else
+      # Keep caret in same place ignoring comment
+      context.editor.selection = [[selection_offset - @start_chars.size, 0].max, 0]
+    end
     return true
   end
   
@@ -184,8 +193,24 @@ class LineComment < Comment
       # Remove extra newline at end
       output = output[0...-1]
     end
-    
-    context.editor[offset, length] = output
+    # Offset's value will change once we edit the contents...
+    replace_start = offset
+    selection_offset = context.editor.selection.offset
+    column = context.editor.caret_column
+    context.editor[replace_start, length] = output
+    # Handle selection/caret
+    if input_is_selection?
+      # Select the newly commented code
+      context.editor.selection = [replace_start, output.length]
+    else
+      # FIXME What if cursor was at zero column? Then we want to make selection start there, but select the added comment prefix!
+      if column == 0
+        context.editor.selection = [selection_offset, @start_chars.length]
+      else
+        # move cursor back to same spot in line
+        context.editor.selection = [selection_offset + @start_chars.length, 0]
+      end
+    end
     return true
   end
   

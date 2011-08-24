@@ -4,6 +4,7 @@ module Ruble
       @name = name
       @hash = {}
       @invoke = Ruble::Invoke.new
+      @key_binding = Ruble::Invoke.new
     end
     
     def invoke(&block)
@@ -16,6 +17,14 @@ module Ruble
     
     def invoke=(invokeString)
       @invoke.all = invokeString if invokeString
+    end
+    
+    def key_binding
+      @key_binding
+    end
+    
+    def key_binding=(binding)
+      @key_binding.all = binding
     end
       
     def method_missing(symbol, *args)
