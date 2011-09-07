@@ -160,14 +160,16 @@ class LineComment < Comment
     output = output[0...-1]
     # Offset's value will change once we edit the contents...
     replace_start = offset
-    selection_offset = context.editor.selection.offset
+    selection = context.editor.selection
+    selection_offset = selection.offset
+    start_of_line = context.editor.offset_at_line(selection.start_line)
     context.editor[replace_start, length] = output
     if input_is_selection?
       # Select the uncommented code
       context.editor.selection = [replace_start, output.length]
     else
-      # Keep caret in same place ignoring comment
-      context.editor.selection = [[selection_offset - @start_chars.size, 0].max, 0]
+      # Keep caret in same place ignoring comment. Don't go past beginning of line.
+      context.editor.selection = [[selection_offset - @start_chars.size, start_of_line].max, 0]
     end
     return true
   end

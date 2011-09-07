@@ -174,6 +174,19 @@ class ToggleCommentTest < CommandTestCase
     assert_equal(Selection.new(0, 0, 1, 1), @context.editor.selection)
   end
   
+  def test_apstud3400
+    @context['input_type'] = :line
+    ENV["TM_COMMENT_START"] = "# "
+    @context.editor.document = "# --\n# first-line:"
+    @context.editor.selection = Selection.new(5, 0, 2, 2)
+    
+    execute("# first-line:")
+    assert_equal("# --\nfirst-line:", @context.editor.document.get)
+    assert_output_type(:discard)
+    # When offset is at beginning of line and no selection, we keep caret at beginning of line
+    assert_equal(Selection.new(5, 0, 2, 2), @context.editor.selection)
+  end
+  
   def test_remove_comment_line_input_line_mode_caret_mid_line
     @context['input_type'] = :line
     ENV["TM_COMMENT_START"] = "# "
