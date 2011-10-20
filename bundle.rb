@@ -41,6 +41,7 @@ END
       submenu.command 'and Insert Terminator'
       submenu.command 'and Insert Terminator + LF'
     end
+	main_menu.command 'Match Brackets'
     main_menu.separator
     main_menu.command 'Align Assignments'
   end
