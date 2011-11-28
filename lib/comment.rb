@@ -74,13 +74,30 @@ class BlockComment < Comment
   def commented?(lines)
     # Is the input wrapped in the start and end chars?
     input = lines.join("\n").strip
-    return input.start_with?(@start_chars) && input.end_with?(@end_chars.rstrip)
+    return input.start_with?(@start_chars.rstrip) && input.end_with?(@end_chars.lstrip)
   end
   
   def remove(lines)
     output = lines.join("\n")
     Ruble::Logger.trace output
-    output = output[(output.index(@start_chars) + @start_chars.size)...output.rindex(@end_chars)]
+    
+    # try finding end of comment with/without trailing whitespaces in start comment block
+    index = output.index(@start_chars)
+    start = 0
+    if index
+      start = index + @start_chars.size
+    else
+      index = output.index(@start_chars.rstrip)
+      start = index + @start_chars.rstrip.size
+    end
+    
+    # Now try finding end block comment, with/without whitespaces
+    after_comment = output.rindex(@end_chars)
+    unless after_comment
+      after_comment = output.rindex(@end_chars.lstrip)
+    end
+    
+    output = output[start...after_comment]
     Ruble::Logger.trace output
 
     context.editor[offset, length] = output
