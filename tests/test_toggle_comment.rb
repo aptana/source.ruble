@@ -293,5 +293,17 @@ class ToggleCommentTest < CommandTestCase
     assert_output_type(:discard)
   end
   
+  def test_remove_block_comment_line_input_missing_surrounding_whitespace
+    @context['input_type'] = :line
+    ENV["TM_COMMENT_START"] = "<!-- "
+    ENV["TM_COMMENT_END"] = " -->"
+    @context.editor.document = "<!--comment-->"
+    @context.editor.selection = Selection.new(0, 0, 1, 1)
+    
+    execute("<!--comment-->")
+    assert_equal("comment", @context.editor.document.get)
+    assert_output_type(:discard)
+  end
+  
   # TODO Add tests that we retain selection after removing or adding comments, block and line
 end
