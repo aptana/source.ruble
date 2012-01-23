@@ -1,7 +1,7 @@
 require 'ruble'
 
 # FIXME Keybinding doesn't seem to work properly
-command 'Toggle Single / Double String Quotes' do |cmd|
+command t(:toggle_quotes) do |cmd|
   cmd.key_binding = 'CONTROL+M2+\''
   cmd.scope = 'string.quoted.single, string.quoted.double'
   cmd.output = :replace_selection

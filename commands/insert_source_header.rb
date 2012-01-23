@@ -1,6 +1,6 @@
 require 'ruble'
 
-command 'Insert Comment Header' do |cmd|
+command t(:insert_comment_header) do |cmd|
   cmd.trigger = 'head'
   cmd.output = :insert_as_snippet
   cmd.input = :none

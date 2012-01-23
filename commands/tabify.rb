@@ -1,6 +1,6 @@
 require 'ruble'
 
-command 'Convert Spaces to Tabs (Estimating Indent)' do |cmd|
+command t(:spaces_to_tabs) do |cmd|
   cmd.key_binding = 'CONTROL+SHIFT+COMMAND+T'
   cmd.output = :replace_document
   cmd.input = :document

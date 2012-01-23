@@ -1,6 +1,6 @@
 require 'ruble'
     
-command 'and Insert LF' do |cmd|
+command t(:insert_lf) do |cmd|
   cmd.key_binding = 'M1+ENTER'
   cmd.scope = 'source'
   cmd.output = :discard

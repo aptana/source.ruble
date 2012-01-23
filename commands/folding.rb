@@ -28,7 +28,7 @@ end
 
 # Toggle Folding levels explicitly
 with_defaults :input => :none, :output => :discard, :key_binding => "OPTION+COMMAND+0" do
-  command 'All Levels' do |cmd|
+  command t(:all_levels) do |cmd|
     cmd.invoke do |context|
       # Toggle all levels
       context.editor.editor_part.source_viewer.doOperation(org.eclipse.jface.text.source.projection.ProjectionViewer::COLLAPSE_ALL)
