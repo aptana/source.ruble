@@ -10,9 +10,9 @@ en:
   insert_comment_header: 'Insert Comment Header'
   reformat_comment: 'Reformat Comment'
   insert_escaped: 'Insert Escaped'
-  single_quotes: 'Single Quotes - \\\'...\\\''
-  double_quotes: 'Double Quotes - \\"...\\"'
-  newline: 'Newline - \\n'
+  single_quotes: "Single Quotes - \\'...\\'"
+  double_quotes: 'Double Quotes - \"...\"'
+  newline: 'Newline - \n'
   toggle_quotes: 'Toggle Single / Double String Quotes'
   toggle_case: 'Toggle camelCase / snake_case / PascalCase'
   move_to_eol: 'Move to EOL'
