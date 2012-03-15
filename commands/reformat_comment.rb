@@ -1,7 +1,7 @@
 require 'ruble'
 
 # FIXME Doesn't like the comment.line scope. We probably aren't matching scopes properly again!
-command 'Reformat Comment' do |cmd|
+command t(:reformat_comment) do |cmd|
   cmd.key_binding = 'CONTROL+Q'
 #  cmd.scope = 'comment.line'
   cmd.output = :insert_as_snippet

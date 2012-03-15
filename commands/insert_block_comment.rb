@@ -1,6 +1,6 @@
 require 'ruble'
 
-command 'Insert Block Comment' do |cmd|
+command t(:insert_block_comment) do |cmd|
   cmd.key_binding = 'M1+M2+/'
   cmd.key_binding.mac = 'M1+M3+/'
   cmd.output = :insert_as_snippet
