@@ -1,6 +1,6 @@
 require 'ruble'
     
-command 'and Insert Terminator + LF' do |cmd|
+command t(:insert_terminator_and_lf) do |cmd|
   cmd.key_binding = 'M1+M2+ENTER'
   cmd.scope = 'source'
   cmd.output = :discard

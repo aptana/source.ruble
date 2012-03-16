@@ -1,6 +1,6 @@
 require 'ruble'
 
-command 'Align Assignments' do |cmd|
+command t(:align_assignments) do |cmd|
   cmd.key_binding = 'OPTION+COMMAND+]'
   cmd.output = :replace_selection
   cmd.input = :selection, :document

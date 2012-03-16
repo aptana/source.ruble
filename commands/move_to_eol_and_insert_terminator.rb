@@ -1,6 +1,6 @@
 require 'ruble'
     
-command 'and Insert Terminator' do |cmd|
+command t(:insert_terminator) do |cmd|
   cmd.key_binding = 'M1+M3+ENTER'
   cmd.scope = 'source'
   cmd.output = :insert_as_snippet

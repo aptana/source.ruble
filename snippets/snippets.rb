@@ -1,6 +1,6 @@
 require 'ruble'
 
-command 'Newline - \\n' do |s|
+command t(:newline) do |s|
   s.key_binding = 'CONTROL+ENTER'
   s.scope = 'source'
   s.input = :none
@@ -9,7 +9,7 @@ command 'Newline - \\n' do |s|
 end
 
 
-command 'Double Quotes - \\"...\\"' do |s|
+command t(:double_quotes) do |s|
   s.key_binding = 'OPTION+COMMAND+\''
   s.input = :none
   s.output = :insert_as_snippet
@@ -23,7 +23,7 @@ command 'Double Quotes - \\"...\\"' do |s|
 end
 
 
-command 'Single Quotes - \\\'...\\\'' do |s|
+command t(:single_quotes) do |s|
   s.key_binding = 'OPTION+COMMAND+\''
   s.input = :none
   s.output = :insert_as_snippet
@@ -37,7 +37,7 @@ command 'Single Quotes - \\\'...\\\'' do |s|
 end
 
 
-command 'Insert Comment Banner' do |s|
+command t(:insert_comment_banner) do |s|
   s.key_binding = 'CONTROL+SHIFT+B'
   s.input = :none
   s.output = :insert_as_snippet
