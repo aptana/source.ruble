@@ -66,6 +66,10 @@ class Comment
   def to_s
     "#{@start_chars}Comment#{@end_chars}"
   end
+
+  def newline
+    document.getLegalLineDelimiters[0]
+  end
 end
 
 # A Block mode Comment
@@ -73,12 +77,12 @@ class BlockComment < Comment
 
   def commented?(lines)
     # Is the input wrapped in the start and end chars?
-    input = lines.join("\n").strip
+    input = lines.join(newline).strip
     return input.start_with?(@start_chars.rstrip) && input.end_with?(@end_chars.lstrip)
   end
   
   def remove(lines)
-    output = lines.join("\n")
+    output = lines.join(newline)
     Ruble::Logger.trace output
     
     # try finding end of comment with/without trailing whitespaces in start comment block
@@ -110,7 +114,7 @@ class BlockComment < Comment
   def add(lines)
     Ruble::Logger.trace "Adding block comment: #{to_s}"
     # Wrap entire input in start and end characters of this comment type
-    output = "#{@start_chars}#{lines.join("\n")}#{@end_chars}"
+    output = "#{@start_chars}#{lines.join(newline)}#{@end_chars}"
 
     context.editor[offset, length] = output
     # Retain selection!
@@ -164,13 +168,15 @@ class LineComment < Comment
       index = l.index(@start_chars.rstrip)
       # If the whitespace after comment chars is removed, we should just remove the part without whitespace
       if l.size < @start_chars.size
-        output << "\n"
+        output << newline
       else
+        output << "#{l[0...index]}"
         if l.index(@start_chars)
-          output << "#{l[0...index]}#{l[(index + @start_chars.size)..-1]}\n"
+          output << l[(index + @start_chars.size)..-1]
         else
-          output << "#{l[0...index]}#{l[(index + @start_chars.rstrip.size)..-1]}\n"
+          output << l[(index + @start_chars.rstrip.size)..-1]
         end
+        output << newline
       end
     end
     # Remove extra newline at end
@@ -204,9 +210,9 @@ class LineComment < Comment
         next unless l
         index = l.index(/\S/)
         if index
-          output << "#{l[0...index]}#{@start_chars}#{l[index..-1]}\n"
+          output << "#{l[0...index]}#{@start_chars}#{l[index..-1]}#{newline}"
         else
-          output << "#{@start_chars}#{l}\n"
+          output << "#{@start_chars}#{l}#{newline}"
         end
       end
       # Remove extra newline at end
