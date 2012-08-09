@@ -68,7 +68,7 @@ class Comment
   end
 
   def newline
-    document.getLegalLineDelimiters[0]
+    document.getDefaultLineDelimiter
   end
 end
 
