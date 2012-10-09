@@ -96,6 +96,8 @@ class BlockComment < Comment
       start = index + @start_chars.rstrip.size
     end
     
+    whitespaces_before = output[0, index]
+    
     # Now try finding end block comment, with/without whitespaces
     after_comment = output.rindex(@end_chars)
     unless after_comment
@@ -103,6 +105,7 @@ class BlockComment < Comment
     end
     
     output = output[start...after_comment]
+    output = whitespaces_before + output
     Ruble::Logger.trace output
 
     context.editor[offset, length] = output
