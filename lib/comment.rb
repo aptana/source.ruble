@@ -1,4 +1,5 @@
 # Base class. This is not meant to be instantiated, instead we generate the special LineComment/BlockComment subclasses
+
 class Comment
   attr_reader :context
   
@@ -114,7 +115,11 @@ class BlockComment < Comment
   def add(lines)
     Ruble::Logger.trace "Adding block comment: #{to_s}"
     # Wrap entire input in start and end characters of this comment type
-    output = "#{@start_chars}#{lines.join(newline)}#{@end_chars}"
+    
+    line0 = lines[0]
+    lines[0] = line0.lstrip
+    whitespaces_before = line0[0,line0.length - lines[0].length]
+    output = "#{whitespaces_before}#{@start_chars}#{lines.join(newline)}#{@end_chars}"
 
     context.editor[offset, length] = output
     # Retain selection!
