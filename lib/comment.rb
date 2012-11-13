@@ -188,7 +188,7 @@ class LineComment < Comment
       end
     end
     # Remove extra newline at end
-    output = output[0...-1]
+    output = output[0...-(newline.length)]
     # Offset's value will change once we edit the contents...
     replace_start = offset
     selection = context.editor.selection
@@ -224,7 +224,7 @@ class LineComment < Comment
         end
       end
       # Remove extra newline at end
-      output = output[0...-1]
+      output = output[0...-(newline.length)]
     end
     # Offset's value will change once we edit the contents...
     replace_start = offset
