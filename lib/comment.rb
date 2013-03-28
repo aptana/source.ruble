@@ -5,7 +5,7 @@ class Comment
   
   def initialize(context, start_chars, end_chars, disable_indent)
     @context, @start_chars, @end_chars = context, start_chars, end_chars
-    @disable_indent = (disable_indent == 'YES')
+    @disable_indent = (disable_indent.downcase == 'yes')
   end
 
   def Comment.from_env(context)
@@ -213,10 +213,10 @@ class LineComment < Comment
     if lines.empty?
       output = @start_chars
     else
-      # Prepend the comment beginning to each line, Retain existing indent (that's the index/regexp thing)!
+      # Prepend the comment beginning to each line, Retain existing indent if required (that's the index/regexp thing)!
       lines.each do |l|
         next unless l
-        index = l.index(/\S/)
+        index = @disable_indent ? 0 : l.index(/\S/)
         if index
           output << "#{l[0...index]}#{@start_chars}#{l[index..-1]}#{newline}"
         else
