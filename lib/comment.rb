@@ -5,7 +5,7 @@ class Comment
   
   def initialize(context, start_chars, end_chars, disable_indent)
     @context, @start_chars, @end_chars = context, start_chars, end_chars
-    @disable_indent = (disable_indent.downcase == 'yes')
+    @disable_indent = (disable_indent && disable_indent.downcase == 'yes')
   end
 
   def Comment.from_env(context)
