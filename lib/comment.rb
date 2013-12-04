@@ -69,7 +69,7 @@ class Comment
   end
 
   def newline
-    document.getDefaultLineDelimiter
+    document.nil? "\n" : document.getDefaultLineDelimiter
   end
 end
 
