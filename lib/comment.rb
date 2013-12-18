@@ -1,4 +1,5 @@
 # Base class. This is not meant to be instantiated, instead we generate the special LineComment/BlockComment subclasses
+
 class Comment
   attr_reader :context
   
@@ -68,7 +69,7 @@ class Comment
   end
 
   def newline
-    document.getDefaultLineDelimiter
+    document.nil? ? "\n" : document.getDefaultLineDelimiter
   end
 end
 
@@ -95,6 +96,8 @@ class BlockComment < Comment
       start = index + @start_chars.rstrip.size
     end
     
+    whitespaces_before = output[0, index]
+    
     # Now try finding end block comment, with/without whitespaces
     after_comment = output.rindex(@end_chars)
     unless after_comment
@@ -102,6 +105,7 @@ class BlockComment < Comment
     end
     
     output = output[start...after_comment]
+    output = whitespaces_before + output
     Ruble::Logger.trace output
 
     context.editor[offset, length] = output
@@ -114,7 +118,11 @@ class BlockComment < Comment
   def add(lines)
     Ruble::Logger.trace "Adding block comment: #{to_s}"
     # Wrap entire input in start and end characters of this comment type
-    output = "#{@start_chars}#{lines.join(newline)}#{@end_chars}"
+    
+    line0 = lines[0]
+    lines[0] = line0.lstrip
+    whitespaces_before = line0[0,line0.length - lines[0].length]
+    output = "#{whitespaces_before}#{@start_chars}#{lines.join(newline)}#{@end_chars}"
 
     context.editor[offset, length] = output
     # Retain selection!
@@ -180,7 +188,7 @@ class LineComment < Comment
       end
     end
     # Remove extra newline at end
-    output = output[0...-1]
+    output = output[0...-(newline.length)]
     # Offset's value will change once we edit the contents...
     replace_start = offset
     selection = context.editor.selection
@@ -216,7 +224,7 @@ class LineComment < Comment
         end
       end
       # Remove extra newline at end
-      output = output[0...-1]
+      output = output[0...-(newline.length)]
     end
     # Offset's value will change once we edit the contents...
     replace_start = offset
