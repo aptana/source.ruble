@@ -36,6 +36,7 @@ bundle do |bundle|
       submenu.command t(:insert_terminator)
       submenu.command t(:insert_terminator_and_lf)
     end
+	main_menu.command 'Match Brackets'
     main_menu.separator
     main_menu.command t(:align_assignments)
   end
